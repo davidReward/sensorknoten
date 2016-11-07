@@ -2,9 +2,17 @@
 #include <fstream>
 #include <ctime>
 #include <RF24/RF24.h>            //Allgemeine Libary f  r NRF24L01+
+#include <cstdlib>
+#include <sstream>
+#include <string>
+#include <unistd.h>
+
+
 using namespace std;
 
 int main() {
+    
+    
     return 0;
 }
 
