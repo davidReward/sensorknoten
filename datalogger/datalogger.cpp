@@ -4,7 +4,11 @@
 #include <RF24/RF24.h>            //Allgemeine Libary f  r NRF24L01+
 using namespace std;
 
-int main () {
+int main() {
+    return 0;
+}
+
+int writeToFile () {
     // current date/time based on current system
     time_t now = time(0);
     
@@ -14,6 +18,7 @@ int main () {
     myfile.close();
     return 0;
 }
+
 
 
 
