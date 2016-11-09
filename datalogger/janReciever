@@ -6,7 +6,7 @@
 //Konstanten und Variablen
 
   // NRF24L01+ Pinbelegung
-  RF24 radio(9,10);
+  RF24 radio(22,0);
   
   // Example below using pipe5 for writing
   const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0x7365727631LL };
