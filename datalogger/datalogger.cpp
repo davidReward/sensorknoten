@@ -50,9 +50,7 @@ int main() {
         if( radio.available()){                                                                   // Variable for the received timestamp
             while (radio.available()) {                                   // While there is data ready
                 radio.read( &t_message, sizeof(t_message) ); 
-                
-                t_sensorData = entschluessleData(t_message);
-                ausgabeData(t_sensorData);
+                writ(t_message);
                 }
         }   
     }
