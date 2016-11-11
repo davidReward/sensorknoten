@@ -50,7 +50,7 @@ int main() {
         if( radio.available()){                                                                   // Variable for the received timestamp
             while (radio.available()) {                                   // While there is data ready
                 radio.read( &t_message, sizeof(t_message) ); 
-                write(t_message);
+                writeToFile(t_message);
                 }
         }   
     }
@@ -59,7 +59,7 @@ int main() {
     return 0;
 }
 
-void write (char input[16]) {
+void writeToFile (char input[16]) {
     // current date/time based on current system
     time_t now = time(0);
     // Hängt Sachen an die Datei an
