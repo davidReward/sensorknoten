@@ -57,7 +57,7 @@ int main() {
         if( radio.available()){                                                                   // Variable for the received timestamp
             while (radio.available()) {                                   // While there is data ready
                 radio.read( &t_message, sizeof(t_message) ); 
-                writeToFile(t_message);
+                writeToFile(&t_message);
                 }
         }   
     }
