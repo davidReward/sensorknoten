@@ -19,7 +19,7 @@ using namespace std;
     //Übermittelte Daten eines Sensors
  
     struct secureMessage{
-    char message [16];
+    char *message [16];
   };
   
 void writeToFile (char input[16]) {
