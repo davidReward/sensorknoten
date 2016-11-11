@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-void write (char input[4]) {
+void write (char input[16]) {
     // current date/time based on current system
     time_t now = time(0);
     // Hängt Sachen an die Datei an
@@ -19,7 +19,7 @@ void write (char input[4]) {
 
 int main () {
     //string recievedData = "Test";
-    char recievedData[]="Helo"; 
+    char recievedData[]="01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101"; 
     cout << recievedData << endl;
     write(recievedData);
     return 0;

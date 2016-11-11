@@ -4,7 +4,6 @@
 #include <RF24/RF24.h>            //Allgemeine Libary f  r NRF24L01+
 #include <cstdlib>
 #include <sstream>
-#include <string>
 #include <unistd.h>
 
 using namespace std;
@@ -18,15 +17,9 @@ using namespace std;
   const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0x7365727631LL };
   
     //Übermittelte Daten eines Sensors
-  struct sensorData{
-    int id;
-    float value;
-    int unit;
-    unsigned long timeId;
-  };
-  
+ 
     struct secureMessage{
-    byte message [16];
+    char message [16];
   };
   
   
@@ -51,13 +44,13 @@ int main() {
 
     
     while(1) {
-        sensorData t_sensorData;
         secureMessage t_message;
         
     
         if( radio.available()){                                                                   // Variable for the received timestamp
             while (radio.available()) {                                   // While there is data ready
                 radio.read( &t_message, sizeof(t_message) ); 
+                
                 t_sensorData = entschluessleData(t_message);
                 ausgabeData(t_sensorData);
                 }
@@ -68,15 +61,13 @@ int main() {
     return 0;
 }
 
-int writeToFile () {
+void write (char input[16]) {
     // current date/time based on current system
     time_t now = time(0);
+    // Hängt Sachen an die Datei an
+    std::ofstream data("data.temp", std::ios_base::app | std::ios_base::out);
     
-    ofstream myfile;
-    myfile.open ("data.temp");
-    myfile << now << " Writing this to a file.\n"<< "test";
-    myfile.close();
-    return 0;
+    data << now << " " << input <<" Writing this to a file.\n";
 }
 
 
