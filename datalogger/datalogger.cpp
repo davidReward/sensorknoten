@@ -19,7 +19,7 @@ using namespace std;
     //Übermittelte Daten eines Sensors
  
     struct secureMessage{
-    char *message [16];
+    char message [16];
   };
   
 void writeToFile (char input[16]) {
@@ -57,7 +57,7 @@ int main() {
         if( radio.available()){                                                                   // Variable for the received timestamp
             while (radio.available()) {                                   // While there is data ready
                 radio.read( &t_message, sizeof(t_message) ); 
-                writeToFile(&t_message);
+                writeToFile(t_message.message);
                 }
         }   
     }
