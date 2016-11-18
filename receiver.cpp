@@ -11,10 +11,6 @@
 using namespace std;
 RF24 radio(22,0);
 
-/********** User Config *********/
-// Assign a unique identifier for this node, 0 or 1
-bool radioNumber = 1;
-
 /********************************/
 
 // Radio pipe addresses for the 2 nodes to communicate.
