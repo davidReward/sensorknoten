@@ -1,9 +1,16 @@
 #!/usr/bin/env python
 import base64
-from cryptography.fernet import Fernet
+#from cryptography.fernet import Fernet
+from Crypto.Cipher import AES
+
 
 #key =base64.urlsafe_b64encode('ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP')
+
 key ='ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP'
+IV = 16 * '\x00'
+mode = AES.MODE_CBC
+
+
 print "Der Schluessel lautet: %s" % key
 cipher_suite = Fernet(key)
 
@@ -13,5 +20,4 @@ for line in data:
        print cipher_text[2]       
        cipher_text_segment=cipher_text[2]
        plain_text = cipher_suite.decrypt((b"cipher_text_segment"))
-       #plain_text = cipher_suite.decrypt(b"cipher_text[2]")
        print "Der entschluesselte Text lautet: %s " % plain_text
