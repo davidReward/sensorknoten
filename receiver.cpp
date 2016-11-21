@@ -24,9 +24,9 @@ void writeToFile (char input[16]) {
     // current date/time based on current system
     time_t now = time(0);
     // Hängt Sachen an die Datei an
-    std::ofstream data("data.temp", std::ios_base::app | std::ios_base::out);
+    std::ofstream data("datafifo", std::ios_base::app | std::ios_base::out);
     
-    data << now << " " << input <<"\n";
+    data << now << " " << input << " " <<"\n";
 }
   
 int main(int argc, char** argv){
