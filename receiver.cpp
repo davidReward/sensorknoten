@@ -31,7 +31,7 @@ void writeToFile (char input[16]) {
   
 int main(int argc, char** argv){
 
-  cout << "RF24 Receiver for Studienarbeit\n";
+  cout << "\n RF24 Receiver for Studienarbeit\n";
 
   
   radio.begin();
@@ -46,7 +46,7 @@ int main(int argc, char** argv){
   radio.openReadingPipe(1,pipes[0]);
 
   
-  radio.printDetails();
+  //radio.printDetails();
 
 
 

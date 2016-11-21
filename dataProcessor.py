@@ -5,9 +5,6 @@ from collections import namedtuple
 from shutil import copyfile
 
 
-#copyfile("data.temp", "datafifo")
-
-#hier data.temp loeschen
 
 data = open("datafifo", "r")
 for line in data:
@@ -17,6 +14,4 @@ for line in data:
        print "ID: %d Value: %f , Unit: %d, TimeID: %d" % (stationID, value, unit, timeid)
        
 data.close()
-
-#hier data_working loeschen
 
