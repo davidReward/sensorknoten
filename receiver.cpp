@@ -26,7 +26,7 @@ void writeToFile (char input[16]) {
     // Hängt Sachen an die Datei an
     std::ofstream data("datafifo", std::ios_base::app | std::ios_base::out);
     
-    data << now << " " << input << " " <<"\n";
+    data << now << " " << input << " " <<"\n"; // Leerzeichen um später besser trennen zu können
 }
   
 int main(int argc, char** argv){
