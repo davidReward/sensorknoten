@@ -19,7 +19,7 @@ while True:
             
             # Muster um aus Bytes Struct zu rekonstruieren
             stationID, value, unit, timeid = unpack('<hfhL', decodedData)
-            print "ID: %d Value: %f , Unit: %d, TimeID: %d" % (stationID, value, unit, timeid)
+            print "Unix time: %d , ID: %d Value: %f , Unit: %d, TimeID: %d" % (receivedData[0], stationID, value, unit, timeid)
        else:
             # wenn keine Daten in der Pipe, dann 3 Sekuden warten
             time.sleep(3)
