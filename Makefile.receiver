@@ -4,6 +4,9 @@ SOURCES = $(PROGRAMS:=.cpp)
 LIBS=-l$(LIB)
 ifeq ($(DRIVER), LittleWire)
 	LIBS+= -llittlewire-spi
+	#angepasst:
+	#LDFLAGS+=-lilclient -lwiringPi 
+	
 endif
 
 all: $(PROGRAMS)
@@ -16,4 +19,3 @@ clean:
 	rm -rf $(PROGRAMS)
 
 
-#.PHONY: install upload
