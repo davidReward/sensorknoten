@@ -3,6 +3,8 @@ import base64
 import time
 from struct import *
 
+# TODO: Entschluesselung hinzufuegen!!
+
 data = open("datafifo", "r")
 while True:       
        #eine Zeile aus Pipe lesen

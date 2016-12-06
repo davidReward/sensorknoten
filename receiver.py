@@ -14,8 +14,7 @@ pipes = [0xF0F0F0F0E1, 0x7365727631]
 
 def setup():
   radio.begin();
-  #radio.setPayloadSize(16);  # Hardcoded size TODO --> len(message)
-  radio.payloadSize = 16
+  radio.payloadSize = 16        # Hardcoded size TODO --> len(message)
   #radio.enableDynamicPayloads()
   radio.setAutoAck(1); 
   radio.setDataRate(RF24_250KBPS); #250kbs
@@ -30,6 +29,8 @@ def setup():
   
 def writeToFile(received_payload):
 	print('Got payload size={} value="{}"'.format(radio.payloadSize, received_payload.decode('utf-8')))
+	
+	# Hier aktuelle Zeit einfuegen
 	data.write("1480427524" + " " + received_payload + " \n")
 	data.flush()
 	
@@ -48,5 +49,7 @@ data = open('datafifo', 'a+')
 print("Hauptprogramm:")
 while 1:
 	receive()
+	
+# spaeter durch interrupt ersetzten
 	time.sleep(1)
 data.close()
