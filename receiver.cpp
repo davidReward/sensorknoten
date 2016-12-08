@@ -7,6 +7,7 @@
 
 #include <ctime>
 #include <fstream>
+//#include <wiringPi.h>
 
 using namespace std;
 RF24 radio(22,0);
@@ -26,14 +27,10 @@ void writeToFile (char input[16]) {
     // Hängt Sachen an die Datei an
     std::ofstream data("datafifo", std::ios_base::app | std::ios_base::out);
     
-    data << now << " " << input << " " <<"\n";
+    data << now << " " << input << " " <<"\n"; // Leerzeichen um später besser trennen zu können
 }
-  
-int main(int argc, char** argv){
 
-  cout << "\n RF24 Receiver for Studienarbeit\n";
-
-  
+void setupReceiver() {
   radio.begin();
   radio.setPayloadSize(sizeof(secureMessage));  //Groesse der gesendeten Daten
   radio.setAutoAck(1); 
@@ -44,19 +41,14 @@ int main(int argc, char** argv){
   radio.setCRCLength(RF24_CRC_16);
   radio.openWritingPipe(pipes[1]);
   radio.openReadingPipe(1,pipes[0]);
-
-  
-  //radio.printDetails();
-
-
+    radio.maskIRQ(0,0,1);
 
     
-	
-	radio.startListening();
-	
-	// forever loop
-	while (1)
-	{
+    radio.startListening();
+}
+
+void receiveData() {
+    
         secureMessage t_message;
 
             if( radio.available()){                             // Variable for the received timestamp
@@ -66,9 +58,26 @@ int main(int argc, char** argv){
                 
                 }
             }
-    } // forever loop
-
-  return 0;
 }
+
+void testPrint() {
+    cout << "Hallo";
+}
+
+
+int main(int argc, char** argv){
+
+    cout << "\n RF24 Receiver for Studienarbeit\n";
+    //radio.printDetails();
+    setupReceiver();
+//    wiringPiISR (1, INT_EDGE_BOTH, &testPrint)
+    
+    while(1) {
+        receiveData();
+    }
+    
+    return 0;
+}
+
 
                      
