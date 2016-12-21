@@ -31,10 +31,10 @@ def writeToFile(received_payload):
 	print('Got payload size={} value="{}"'.format(radio.payloadSize, received_payload.decode('utf-8')))
 	
 	#Timestamp erzeugen
-	utime=time.time()
+	utime=int(time.time())
 	
 	# Hier aktuelle Zeit einfuegen
-	data.write("%d" + " " + received_payload + " \n") % utime
+	data.write("1481278800" + " " + received_payload + " \n") #% utime
 	data.flush()
 	
 def receive():
