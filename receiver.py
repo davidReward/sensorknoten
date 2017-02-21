@@ -3,6 +3,7 @@
 #from __future__ import print_function
 import time
 from RF24 import *
+import pdb
 import RPi.GPIO as GPIO
 import os, sys
 
@@ -49,6 +50,7 @@ def receive():
 
 #Hauptprogramm:			
 print ("Hallo")
+pdb.set_trace()
 setup()
 radio.printDetails()
 data = open('datafifo', 'a+')
