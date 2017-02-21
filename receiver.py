@@ -42,11 +42,13 @@ def receive():
     if radio.available():
 		while radio.available():
 			len = radio.payloadSize
+
 			receive_payload = radio.read(len)
 			writeToFile(receive_payload)	
         
 
 #Hauptprogramm:			
+print ("Hallo")
 setup()
 radio.printDetails()
 data = open('datafifo', 'a+')
