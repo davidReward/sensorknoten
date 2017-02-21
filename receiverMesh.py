@@ -10,36 +10,28 @@ import os, sys
 irq_gpio_pin = None
 
 radio = RF24(22, 0)
-pipes = [0xF0F0F0F0E1, 0x7365727631]
+pipes = ["1Node", "2Node"]
 
 
 def setup():
-    pdb.set_trace()
-    radio.printDetails()
     radio.begin()
-    print ("Hallo")
-    pdb.set_trace()
-
-    radio.payloadSize = 16  # len(message)
+    radio.payloadSize = 20
     radio.enableDynamicPayloads()
     radio.setAutoAck(1)
     radio.setDataRate(RF24_250KBPS)  # 250kbs
     radio.setPALevel(RF24_PA_MAX)
-
-    print ("Hallo")
-    pdb.set_trace()
-
     radio.setChannel(90)
     radio.setRetries(15, 15)
     radio.setCRCLength(RF24_CRC_16)
-    radio.openWritingPipe(pipes[1])
+    radio.openWritingPipe(pipes[0])
     radio.openReadingPipe(1, pipes[0])
     # radio.maskIRQ(0,0,1)
     radio.startListening()
 
 
 def writeToFile(received_payload):
-    print('Got payload size={} value="{}"'.format(radio.payloadSize, received_payload.decode('utf-8')))
+    pdb.set_trace()
+    #print('Got payload size={} value="{}"'.format(radio.payloadSize, received_payload.decode('utf-8')))
 
     # Timestamp erzeugen
     utime = int(time.time())
@@ -52,20 +44,20 @@ def writeToFile(received_payload):
 def receive():
     if radio.available():
         while radio.available():
-            len = radio.payloadSize
+            sizeOfMessage = radio.payloadSize
+            print "%d " % sizeOfMessage
 
-            receive_payload = radio.read(len)
+            receive_payload = radio.read(sizeOfMessage)
+
+
             writeToFile(receive_payload)
 
 
 # Hauptprogramm:
-pdb.set_trace()
-print ("Hallo")
-pdb.set_trace()
 setup()
 radio.printDetails()
-data = open('datafifo', 'a+')
-print("Hauptprogramm:")
+data = open('data', 'a+')
+print(" \n Hauptprogramm:")
 while 1:
     receive()
 
