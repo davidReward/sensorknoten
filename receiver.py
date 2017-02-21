@@ -49,6 +49,7 @@ def receive():
         
 
 #Hauptprogramm:			
+pdb.set_trace()
 print ("Hallo")
 pdb.set_trace()
 setup()
