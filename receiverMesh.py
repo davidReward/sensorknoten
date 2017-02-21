@@ -15,17 +15,18 @@ pipes = [0xF0F0F0F0E1, 0x7365727631]
 
 def setup():
     pdb.set_trace()
-    # radio.printDetails()
-    # radio.begin()
+    radio.printDetails()
+    radio.begin()
     print ("Hallo")
     pdb.set_trace()
 
-    #radio.payloadSize = 16  # len(message)
-    # radio.enableDynamicPayloads()
+    radio.payloadSize = 16  # len(message)
+    radio.enableDynamicPayloads()
     radio.setAutoAck(1)
     radio.setDataRate(RF24_250KBPS)  # 250kbs
     radio.setPALevel(RF24_PA_MAX)
 
+    print ("Hallo")
     pdb.set_trace()
 
     radio.setChannel(90)
