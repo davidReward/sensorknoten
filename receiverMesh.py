@@ -18,7 +18,7 @@ pipes = ["1Node", "2Node"]
 
 def setup():
     radio.begin()
-    radio.payloadSize = 20
+    radio.payloadSize = 6
     radio.enableDynamicPayloads()
     radio.setAutoAck(1)
     radio.setDataRate(RF24_250KBPS)  # 250kbs
@@ -47,9 +47,8 @@ def writeToFile(received_payload):
 def receive():
     if radio.available():
         while radio.available():
-            sizeOfMessage = radio.payloadSize
-            receive_payload = radio.read(sizeOfMessage)
-            print "%s" % receive_payload
+            receive_payload = radio.read(radio.payloadSize)
+            #print "%s" % receive_payload
             writeToFile(receive_payload)
 
 
