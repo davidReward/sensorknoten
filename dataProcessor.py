@@ -6,7 +6,7 @@ from shutil import copyfile
 
 
 
-data = open("datafifo", "r")
+data = open("data", "r")
 for line in data:
        receivedData= line.partition(" ")
        decodedData=base64.b64decode(receivedData[2])             

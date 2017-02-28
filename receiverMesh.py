@@ -3,9 +3,12 @@
 # from __future__ import print_function
 import time
 from RF24 import *
+import base64
 import pdb
 import RPi.GPIO as GPIO
 import os, sys
+import struct
+import binascii
 
 irq_gpio_pin = None
 
@@ -30,7 +33,6 @@ def setup():
 
 
 def writeToFile(received_payload):
-    pdb.set_trace()
     #print('Got payload size={} value="{}"'.format(radio.payloadSize, received_payload.decode('utf-8')))
 
     # Timestamp erzeugen
@@ -41,15 +43,13 @@ def writeToFile(received_payload):
     data.flush()
 
 
+
 def receive():
     if radio.available():
         while radio.available():
             sizeOfMessage = radio.payloadSize
-            print "%d " % sizeOfMessage
-
             receive_payload = radio.read(sizeOfMessage)
-
-
+            print "%s" % receive_payload
             writeToFile(receive_payload)
 
 

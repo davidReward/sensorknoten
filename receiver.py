@@ -4,6 +4,7 @@
 import time
 from RF24 import *
 import pdb
+import base64
 import RPi.GPIO as GPIO
 import os, sys
 
