@@ -1,15 +1,10 @@
 #!/usr/bin/env python
-
-# from __future__ import print_function
 import time
 import base64
-import pdb
-import RPi.GPIO as GPIO
 import hashlib
 import sqlite3
 import signal
 import sys
-
 from RF24 import *
 from struct import *
 
@@ -19,7 +14,6 @@ radio = RF24(22, 0)
 pipes = ["1Node", "2Node"]
 
 DBconn = sqlite3.connect('node1.db')
-
 queryCurs=DBconn.cursor()
 
 
@@ -68,26 +62,12 @@ def receive():
             receive_payload = radio.read(radio.payloadSize)
             decodedData = base64.b64decode(receive_payload)
             destinationAddr, originAddr, lastHopAddr, messageID, stationID, value, unit, timeID = unpack('<hhhhhfhL', decodedData)
-            #print "destinationAddr: %d , originAddr: %d , lastHopAddr: %d , messageID: %d , ID: %d Value: %f , Unit: %d, TimeID: %d" % (destinationAddr,originAddr,lastHopAddr,messageID, stationID, value, unit, timeID)
-
-            #print "Hash: %s" % genearteID_hashed(stationID,messageID,timeID)
-
             processData(stationID,messageID,timeID,originAddr,value,unit)
 
-            queryCurs.execute('SELECT * FROM messwerte')
-
-            #for i in queryCurs:
-                #print i
-
-
-# Hauptprogramm:
 setup()
-radio.printDetails()
-print(" \n Hauptprogramm:")
+#radio.printDetails()
 signal.signal(signal.SIGINT, signal_handler)
 
 while 1:
     receive()
-
-    # spaeter durch interrupt ersetzten
     time.sleep(1)

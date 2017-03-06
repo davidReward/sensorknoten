@@ -3,3 +3,4 @@
 receiver
 data
 *.db
+*.log
