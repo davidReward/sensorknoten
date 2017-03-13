@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-import sqlite3
-
+def createJSON():
+    print 'Hello'
 
 def queryDB(table, col, value):
     DBconn = sqlite3.connect('node1.db')
@@ -11,8 +10,8 @@ def queryDB(table, col, value):
     print result
     DBconn.close()
 
-table="messwerte"
-col = "value"
-value="31.0"
+#table="messwerte"
+#col = "value"
+#value="31.0"
 
-print queryDB(table, col, value)
+#print queryDB(table, col, value)
