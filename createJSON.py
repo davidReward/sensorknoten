@@ -1,3 +1,7 @@
+import sqlite3
+import json
+
+
 def createJSON():
     print 'Hello'
 
@@ -6,12 +10,7 @@ def queryDB(table, col, value):
     queryCurs = DBconn.cursor()
     queryCurs.execute('SELECT * FROM {SQLtable} WHERE {SQLcol}={SQLvalue}'. \
                       format(SQLtable=table, SQLcol = col, SQLvalue = value))
-    result = queryCurs.fetchall()
-    print result
+
+    json_string = json.dumps(queryCurs.fetchall())
     DBconn.close()
-
-#table="messwerte"
-#col = "value"
-#value="31.0"
-
-#print queryDB(table, col, value)
+    return json_string

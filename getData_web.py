@@ -9,7 +9,7 @@ auth = HTTPBasicAuth()
 
 app = Flask(__name__)
 
-tasks = [
+mdata = [
     {
         'id': 1,
         'title': u'Buy groceries',
@@ -25,14 +25,14 @@ tasks = [
 ]
 
 
-def make_public_task(task):
-    new_task = {}
-    for field in task:
+def make_public_mdatum(mdatum):
+    new_ressource = {}
+    for field in mdatum:
         if field == 'id':
-            new_task['uri'] = url_for('get_task', task_id=task['id'], _external=True)
+            new_ressource['uri'] = url_for('get_mdatum', mdatum_id=mdatum['id'], _external=True)
         else:
-            new_task[field] = task[field]
-    return new_task
+            new_ressource[field] = mdatum[field]
+    return new_ressource
 
 @auth.get_password
 def get_password(username):
@@ -49,20 +49,25 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
+@app.route('/todo/api/v1.0/mdata', methods=['GET'])
 @auth.login_required
-def get_tasks():
-    return jsonify({'tasks': [make_public_task(task) for task in tasks]})
+def get_mdata():
+    return jsonify({'mdata': [make_public_mdatum(mdatum) for mdatum in mdata]})
 
-@app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
+@app.route('/todo/api/v1.0/mdata/<int:mdatum_id>', methods=['GET'])
 @auth.login_required
-def get_task(task_id):
-    task = [task for task in tasks if task['id'] == task_id]
-    if len(task) == 0:
+def get_mdatum(mdatum_id):
+    mdatum = [mdatum for mdatum in mdata if mdatum['id'] == mdatum_id]
+    if len(mdatum) == 0:
         abort(404)
-    return jsonify({'tasks': [make_public_task(task[0])]})
+    return jsonify({'mdata': [make_public_mdatum(mdatum[0])]})
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    table="messwerte"
+    col = "value"
+    value="31.0"
 
+    print queryDB(table, col, value)
+
+    app.run(host='0.0.0.0', debug=True)
