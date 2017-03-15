@@ -16,3 +16,5 @@ def queryDB(table, col, value, limit):
 
     DBconn.close()
     return row_json
+
+#SELECT MAX(timestamp),originAddr, unit, id, value from messwerte WHERE originAddr = 400 GROUP BY unit
