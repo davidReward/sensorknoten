@@ -53,6 +53,6 @@ def get_mStationAll():
 
 
 if __name__ == '__main__':
-    #print queryDB('id','1c45f80bebbfd3eaf0c2ccb4c28982e8')
+    #print queryDB_id('e39a977d6bce4395cad34b00dfbf545d')
     app.run(host='0.0.0.0', debug=True)
 

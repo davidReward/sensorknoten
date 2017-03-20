@@ -25,14 +25,13 @@ def queryDBLimit(col, value, limit):
     DBconn.close()
     return row_json
 
-def queryDB(col, value):
+def queryDB_id(id):
     DBconn = sqlite3.connect(SQL_DB)
     # This enables column access by name: row['column_name']
     DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
 
-    queryCurs.execute('SELECT timestamp, originAddr, unit, id, value FROM {SQLtable} WHERE {SQLcol}={SQLvalue}'. \
-                        format(SQLtable=SQL_TABLE, SQLcol=col, SQLvalue=value))
+    queryCurs.execute('SELECT * FROM messwerte where id=?', (id,))
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]
