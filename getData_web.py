@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort, make_response, url_for
+from flask import Flask, jsonify, abort, make_response, url_for, request
 from flask.ext.httpauth import HTTPBasicAuth
 from createJSON import *
 from flask_cors import CORS, cross_origin
@@ -32,16 +32,17 @@ def unauthorized():
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
-@app.route('/mdata/<int:id>', methods=['GET'])
+@app.route('/mdata/', methods=['GET'])
 @auth.login_required
-def get_mdata(id):
-    query_result = queryDB('id', id)
+def get_mdata():
+    query_result = queryDBLimit('originAddr', 400, 0)
     return jsonify({'Messdaten': query_result})
 
-@app.route('/mdata/station/<int:station>/<int:limit>', methods=['GET'])
+#TODO: Parameteruebergabe
+@app.route('/mdata/station/<int:station>', methods=['GET'])
 @auth.login_required
-def get_mdataall(station,limit):
-    query_result = queryDBLimit('originAddr', station, limit)
+def get_mdataall(station):
+    query_result = queryDBLimit('originAddr', station, 2)
     return jsonify({'Messdaten': query_result})
 
 @app.route('/mdata/station', methods=['GET'])
@@ -52,4 +53,6 @@ def get_mStationAll():
 
 
 if __name__ == '__main__':
+    #print queryDB('id','1c45f80bebbfd3eaf0c2ccb4c28982e8')
     app.run(host='0.0.0.0', debug=True)
+

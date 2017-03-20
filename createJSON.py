@@ -1,11 +1,12 @@
 import sqlite3
 
 #Constants
+SQL_DB = 'node1.db'
 SQL_TABLE = 'messwerte'
 
 #TODO: die letzten n messungen
 def queryDBLimit(col, value, limit):
-    DBconn = sqlite3.connect('node1.db')
+    DBconn = sqlite3.connect(SQL_DB)
     # This enables column access by name: row['column_name']
     DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
@@ -25,12 +26,12 @@ def queryDBLimit(col, value, limit):
     return row_json
 
 def queryDB(col, value):
-    DBconn = sqlite3.connect('node1.db')
+    DBconn = sqlite3.connect(SQL_DB)
     # This enables column access by name: row['column_name']
     DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
 
-    queryCurs.execute('timestamp, originAddr, unit, id, value FROM {SQLtable} WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
+    queryCurs.execute('SELECT timestamp, originAddr, unit, id, value FROM {SQLtable} WHERE {SQLcol}={SQLvalue}'. \
                         format(SQLtable=SQL_TABLE, SQLcol=col, SQLvalue=value))
 
     row = queryCurs.fetchall()
@@ -40,7 +41,7 @@ def queryDB(col, value):
     return row_json
 
 def queryDBallStation():
-    DBconn = sqlite3.connect('node1.db')
+    DBconn = sqlite3.connect(SQL_DB)
     # This enables column access by name: row['column_name']
     DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
