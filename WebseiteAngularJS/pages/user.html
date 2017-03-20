@@ -1,0 +1,68 @@
+<div class="container">
+	
+  <h3>Startseite</h3>
+  	
+  	
+  	    <div class="container">
+        <section style="padding-bottom: 50px; padding-top: 50px;">        		
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="img/250x250.png" class="img-rounded img-responsive" />
+                    <br />
+                    <br />
+                    
+		            <ul class="list-group">
+		            <li class="list-group-item text-muted listeErste"><strong>Benutzerdaten</strong></li>
+		            <li class="list-group-item text-right"><span class="pull-left"><strong>Username</strong></span>{{user.userName}}</li>
+		            <li class="list-group-item text-right"><span class="pull-left"><strong>E-Mail Addresse</strong></span>{{user.email}}</li>
+		            <li class="list-group-item text-right"><span class="pull-left"><strong>Hochschule</strong></span>{{user.hochschule}}</li>
+		            
+		          </ul> 
+                    <br>
+                    
+                    <div class="col-md-6 padtop15">
+                    <button type="button" class="btn btn-success" ng-click="profilAnpassen()">Profil anpassen</button> 
+					</div>
+                    <div class="col-md-6 padtop15">
+                    <button type="button" class="btn btn-warning" ng-click="passwortAendern()" id="buttonPasswortAendern">Passwort ändern</button>
+                 	</div>
+                 	
+                    <br /><br/>
+                </div>
+                <div class="col-md-8">
+                    <div class="alert alert-info">
+                        <h2>Über effortManagement</h2>
+                        <h4>
+                        effortManagement ist eine Webanwendung, welche Terminplanung und Aufwand für einzelne Vorlesungen/Fächer koordiniert. Die Anwendung unterstützt den Studenten von Beginn des Semesters bei der Planung und gibt detaillierte Aufschlüsse bei der Reflexion des Lernaufwands.
+                        </h4>
+                        <p>
+                        Wenn ein dualer Student die Summe aus den fixen Vorlesungstunden und den eingetragenen Heimarbeitsstunden bildet ergibt sich für ihn, je nach Semester, ein Aufwand zwischen fünfzig und siebzig Stunden pro Woche. Der duale Student ist darauf angewiesen die ihm zur Verfügung stehende Zeit möglichst effektiv zu nutzen. Wir möchten eine Anwendung entwickeln die es jedem Student ermöglicht einen individuellen Lernplan zu erstellen und dauerhaft anzupassen. Dazu trägt der er zu Beginn jedes Semesters seine Vorlesungen ein. An dieser Stelle muss der Benutzer entscheiden wie viel Zeit er tatsächlich für jedes Fach einplant und welche Note er anstrebt. In einem Zeitplan kann nun die angestrebte Lernzeit auf konkrete Tage eingeteilt werden.
+                        </p>
+                        <p>
+                        Features:
+                        </p>
+                        <ul>
+                        <li>Aufgabenplanung</li>
+                        <li>Vorlesungsplan</li>
+                        <li>Langzeitauswertung / Reflexion</li>
+                        <li>Semesterübersicht / Lerneffizienz</li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- ROW END -->
+
+
+        </section>
+        <!-- SECTION END -->
+    </div>
+    <!-- CONATINER END -->
+  	
+</div>
+
+
+
+
+
