@@ -1,6 +1,6 @@
 
   body {
-      background-color: #fcfcfc;
+	  background-color: #f1f4f5;
   }
   h2 {
       font-size: 24px;
@@ -206,4 +206,38 @@
 	border-bottom-right-radius:5px;
 	border-top-right-radius:0;
 	border-top-left-radius:0; 	
+}
+table {
+    background-color: white;
+}
+.widget{
+	background-color: #ffffff;
+	border-radius: 3px;
+	margin-bottom: 30px;
+    position: relative;
+}
+.bg-white {
+    color: #76838f;
+    background-color: #ffffff;
+}
+.padding-25 {
+    padding: 25px !important;
+}
+.counter {
+    text-align: center;
+}
+.counter > .counter-number, .counter .counter-number-group {
+    color: #37474f;
+}
+.counter-lg .counter-number-group, .counter-lg > .counter-number {
+    font-size: 40px;
+}
+.counter {
+    text-align: center;
+}
+.counter-label {
+    display: block;
+}
+.text-uppercase {
+    text-transform: uppercase !important;
 }

@@ -1,15 +1,15 @@
 angular.module('wettEditor').controller(
-            'stationUebersichtCtrl',
-            [ '$rootScope', '$scope', '$location', '$routeParams' ,'$filter','$http', '$window', 'alertService' , '$uibModal', 'sensorDataService', 'stationId',
-                    function($rootScope, $scope, $location, $routeParams, $filter, $http, $window , alertService , $uibModal, sensorDataService, stationId) {
+            'stationCtrl',
+            [ '$rootScope', '$scope', '$location', '$routeParams' ,'$filter','$http', '$window', 'alertService' , '$uibModal', 'sensorDataService', 
+                    function($rootScope, $scope, $location, $routeParams, $filter, $http, $window , alertService , $uibModal, sensorDataService) {
             	
+            	$scope.stationId = $routeParams.stationId;
 
-            	
             	$scope.sensorList = [];
 				
             	//Vorlesung List laden
             	$scope.getStationNow = function() {
-            		sensorDataService.getStationNow().then(
+            		sensorDataService.getStationNow($routeParams.stationId).then(
 							function(response) {
 								$scope.sensorList = response.data;
 							}, function(response) {
@@ -17,7 +17,7 @@ angular.module('wettEditor').controller(
 							});
 				};
 				
-				$scope.getStationNow(stationId);
+				$scope.getStationNow($routeParams.stationId);
             	
 	
 								

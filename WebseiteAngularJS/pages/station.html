@@ -1,6 +1,6 @@
 <div class="container">
         <section style="padding-bottom: 50px; padding-top: 50px;">
-        		<h1>Stationen</h1>
+        		<h1>Station: <div ng-bind="stationId">Unbekannt</div></h1>
 				
 				
 				<div class="table-responsive">
@@ -12,7 +12,7 @@
 				    </tr>
 				    </thead>
 				   <tbody>
-				        <tr ng-repeat="station in stationList.Stationen">
+				        <tr ng-repeat="sensor in sensorList.Messdaten">
 				            <td ng-bind="station.originAddr"></td>
 				            <td> <button type="button" class="btn btn-default" ng-click="showAktuelleWerte(station.originAddr)">Aktuelle Werte</button></td>
 				        </tr> 
@@ -21,6 +21,19 @@
 					
 					
 				    </div>
+					
+					<div class="row">
+						<div class="col-md-3" ng-repeat="sensor in sensorList.Messdaten">
+						  <div class="widget">
+							<div class="widget-content padding-25 bg-white">
+							  <div class="counter counter-lg">
+								<span class="counter-number" ng-bind="(sensor.value | number: 1) + ' ' + sensor.unit">9999</span>
+								<div class="counter-label text-uppercase">Temperatur</div>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					</div>
         </section>
         <!-- SECTION END -->
     

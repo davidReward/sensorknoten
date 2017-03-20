@@ -12,8 +12,8 @@
             })
             // route for the semester page
             .when('/stationen/:stationId', {
-                templateUrl : 'pages/stationList.html',
-                controller  : 'stationUebersichtCtrl',
+                templateUrl : 'pages/station.html',
+                controller  : 'stationCtrl',
                 activetab: 'stationen'
             })
 	        .otherwise({

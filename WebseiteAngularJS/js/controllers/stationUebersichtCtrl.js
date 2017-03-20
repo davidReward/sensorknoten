@@ -5,7 +5,7 @@ angular.module('wettEditor').controller(
             	
 
             	
-            	$scope.stationList = [];
+            	$scope.stationList = 'Test';
 				
             	//Vorlesung List laden
             	$scope.loadAllStation = function() {
@@ -20,7 +20,9 @@ angular.module('wettEditor').controller(
 				
 				$scope.loadAllStation();
             	
-	
+				$scope.showAktuelleWerte = function(stationId) {
+					 $location.path('/stationen/' + stationId );
+				};
 								
 						
 } ]);
