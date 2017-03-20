@@ -17,13 +17,10 @@ def queryDB(col, value, limit):
         queryCurs.execute('SELECT MAX(timestamp)-{SQLlimit}, originAddr, unit, id, value FROM {SQLtable} WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
                         format(SQLtable=SQL_TABLE, SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
-
         row = queryCurs.fetchall()
         row_json = [ dict(rec) for rec in row ]
 
     DBconn.close()
-    print '####################################'
-    print row_json
     return row_json
 
 

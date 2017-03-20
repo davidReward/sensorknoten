@@ -32,7 +32,7 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@app.route('/mdata/station/<int:station>/<int:limit>', methods=['GET'])
+@app.route('/mdata/station/<int:station>/int/<int:limit>', methods=['GET'])
 @auth.login_required
 def get_mdataall(station,limit):
     query_result = queryDB('originAddr',station,limit)
