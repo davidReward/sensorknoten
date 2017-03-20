@@ -4,3 +4,4 @@ receiver
 data
 *.db
 *.log
+*.pyc
