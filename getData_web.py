@@ -40,6 +40,12 @@ def get_mdataall(station):
     query_result = queryDB('messwerte','originAddr',station,1)
     return jsonify({'Messdaten': [query_result]})
 
+@app.route('/mdata/station', methods=['GET'])
+@auth.login_required
+def get_mStationAll():
+    query_result = queryDBallStation('messwerte')
+    return jsonify({'Stationen': [query_result]})
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

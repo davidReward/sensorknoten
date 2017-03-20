@@ -21,3 +21,21 @@ def queryDB(table, col, value, limit):
 
     DBconn.close()
     return row_json
+
+def queryDBallStation(table):
+    DBconn = sqlite3.connect('node1.db')
+    # This enables column access by name: row['column_name']
+    DBconn.row_factory = sqlite3.Row
+    queryCurs = DBconn.cursor()
+
+    queryCurs.execute('SELECT originAddr FROM {SQLtable} GROUP BY originAddr'. \
+                      format(SQLtable=table))
+
+    row = queryCurs.fetchall()
+    row_json = [ dict(rec) for rec in row ]
+
+    DBconn.close()
+    return row_json
+
+
+
