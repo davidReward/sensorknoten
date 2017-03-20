@@ -6,7 +6,7 @@ from flask_cors import CORS, cross_origin
 auth = HTTPBasicAuth()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app,supports_credentials=True)
 
 
 def make_public_mdatum(mdatum):
