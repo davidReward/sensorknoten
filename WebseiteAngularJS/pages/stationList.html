@@ -1,0 +1,29 @@
+<div class="container">
+        <section style="padding-bottom: 50px; padding-top: 50px;">
+        		<h1>Stationen</h1>
+				
+				
+				<div class="table-responsive">
+				    <table class="table table-hover">
+				    <thead>
+				    <tr>
+				        <th width="120">Stations Nr.</th>
+				        <th width="60">Aktuelle Werte</th>
+				    </tr>
+				    </thead>
+				   <tbody>
+				        <tr ng-repeat="station in stationList.Stationen">
+				            <td ng-bind="station.originAddr"></td>
+				            <td> <button type="button" class="btn btn-default" ng-click="">Aktuelle Werte</button></td>
+				        </tr> 
+				    </tbody>   				     
+				    </table>
+				    </div>
+        </section>
+        <!-- SECTION END -->
+    
+    <!-- CONATINER END -->
+  	
+</div>
+
+

@@ -1,0 +1,102 @@
+
+<div class="modal-header " style="background-color: orange">
+	<button type="button" class="close" ng-click="closeModal()">&times;</button>
+	<h4 style="color: white;">
+		<span></span> Vorlesung erstellen
+	</h4>
+</div>
+<div class="modal-body" id="modal-bodyLinks">
+	<div>
+		<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+			close="closeAlert($index)">{{alert.msg}}</uib-alert>
+	</div>
+	<form name="createSemester" class="form-horizontal" autocomplete="off">
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-2">
+				<label for="vorlesungName">Vorlesungs Name</label>
+			</div>
+			<div class="col-sm-5">
+				<input type="text" name="vorlesungName" class="form-control"
+					id="vorlesungName" required="required" maxlength="60"
+					placeholder="z.B. Mathematik II" ng-model="vorlesung.vorlesungName">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-2">
+				<label for="vorlesungName">Semester:</label>
+			</div>
+			<div class="col-sm-5">
+				<select class="form-control" ng-model="vorlesung.semesterId">
+					<option ng-repeat="semester in semesterList"
+						value="{{semester.semesterId}}" ng-bind="semester.semesterName"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-2">
+				<label for="creditPoints">Credit Points:</label>
+			</div>
+			<div class="col-sm-5">
+				<input type="number" name="creditPoints" class="form-control"
+					id="creditPoints" required="required" min="1" step="1"
+					ng-model="vorlesung.creditPoints">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-2">
+				<label for="vorlesungName">Angegebener Aufwand:</label>
+			</div>
+			<div class="col-sm-5">
+				<input type="number" name="vorlesungName" class="form-control"
+					id="vorlesungName" required="required" min="1" step="1"
+					ng-model="vorlesung.aufwand">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-2">
+				<label for="vorlesungName">Geplanter Aufwand:</label>
+			</div>
+			<div class="col-sm-5">
+				<input type="number" name="vorlesungName" class="form-control"
+					id="vorlesungName" required="required" min="0" step="1"
+					ng-model="vorlesung.geplanterAufwand">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-2">
+				<label for="vorlesungName">Angestrebte Note</label>
+			</div>
+			<div class="col-sm-5">
+				<input type="number" name="vorlesungName" class="form-control"
+					id="vorlesungName" required="required" step="0.1" min="1" max="6"
+					ng-model="vorlesung.angestrebteNote">
+			</div>
+		</div>
+
+
+
+
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-5">
+				<button type="button" class="btn btn-default btn-warning"
+					ng-click="vorlesungErstellen()"
+					ng-disabled="createSemester.$invalid">
+					<span class="glyphicon glyphicon-ok"></span>Vorlesung erstellen
+				</button>
+			</div>
+		</div>
+	</form>
+
+</div>
+
+<div class="modal-footer footerERG">
+	<button type="button" class="btn btn-default btn-default pull-left"
+		ng-click="closeModal()">
+		<span class="glyphicon glyphicon-remove"></span> Cancel
+	</button>
+
+
+</div>

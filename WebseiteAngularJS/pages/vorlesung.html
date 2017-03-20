@@ -1,0 +1,67 @@
+<div class="container">
+	<section style="padding-bottom: 50px; padding-top: 50px;">
+		<h1>Vorlesung</h1>
+
+
+		 <div class="row">
+		  <label class="col-sm-2" for="semesterId">Semester auswählen:</label>
+		  <div class="col-sm-2">
+		  <select class="form-control" id="semesterId" ng-model="aktuelleSemesterId" ng-change="changeSemester()">
+		    <option ng-repeat="semester in semesterList"
+					ng-bind="semester.semesterName" value="{{semester.semesterId}}"></option>
+		 
+		  </select>
+		  </div>
+		</div>
+		
+
+		<div class="table-responsive" ng-if="(vorlesungList.length !== 0)">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th width="120">Vorlesungsname</th>
+						<th width="120">Vorgegebener Aufwand</th>
+						<th width="120">Geplanter Aufwand</th>
+						<th width="60">Angestrebte Note</th>
+						<th width="60">Gebuchter Aufwand</th>
+						<th width="60">Aufwand Buchen</th>
+						<th width="60">Endnote</th>
+						<!-- <th width="30"></th>  -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="vorlesung in vorlesungList">
+						<td ng-bind="vorlesung.vorlesungName"></td>
+						<td ng-bind="vorlesung.aufwand"></td>
+						<td ng-bind="vorlesung.geplanterAufwand"></td>
+						<td ng-bind="vorlesung.angestrebteNote"></td>
+						<td ng-bind="vorlesung.lernzeit"></td>
+						<td>
+							<button type="button" class="btn btn-default"
+								ng-click="aufwandBuchen(vorlesung.vorlesungId)">Aufwand
+								buchen</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-default"
+								ng-click="endNoteEintragen(vorlesung.vorlesungId)">Endnote eintragen
+								</button>
+						</td>
+						<!-- <td><a ng-click="" style="cursor: pointer"><i
+								class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>  -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="table-responsive" ng-if="(vorlesungList.length === 0)">
+			<p>Sie haben für dieses Semester noch keine Vorlesung angelegt!</p>
+		</div>
+		<button type="button" class="btn btn-default"
+			ng-click="newVorlesung()">Neue Vorlesung</button>
+	</section>
+	<!-- SECTION END -->
+
+	<!-- CONATINER END -->
+
+</div>
+
+<!--  <pre>{{vorlesungList | json}}</pre>-->
