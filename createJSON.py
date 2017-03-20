@@ -38,6 +38,3 @@ def queryDBallStation():
 
     DBconn.close()
     return row_json
-
-
-
