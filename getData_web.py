@@ -42,7 +42,7 @@ def get_mdataall(station,limit):
 @auth.login_required
 def get_mStationAll():
     query_result = queryDBallStation()
-    return jsonify({'Stationen': [query_result]})
+    return jsonify({'Stationen': query_result})
 
 
 if __name__ == '__main__':
