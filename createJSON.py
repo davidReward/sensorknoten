@@ -15,6 +15,7 @@ def queryDB(table, col, value, limit):
     queryCurs.execute('SELECT MAX(timestamp), originAddr, unit, id, value FROM {SQLtable} WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
                       format(SQLtable=table, SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
+
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]
 
@@ -36,5 +37,5 @@ def queryDBallStation(table):
     DBconn.close()
     return row_json
 
-#use this:
-#SELECT MAX(timestamp),originAddr, unit, id, value from messwerte WHERE originAddr = 400 GROUP BY unit
+
+
