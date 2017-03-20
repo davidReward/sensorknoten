@@ -3,7 +3,8 @@ import sqlite3
 #Constants
 SQL_TABLE = 'messwerte'
 
-def queryDB(col, value, limit):
+#TODO: die letzten n messungen
+def queryDBLimit(col, value, limit):
     DBconn = sqlite3.connect('node1.db')
     # This enables column access by name: row['column_name']
     DBconn.row_factory = sqlite3.Row
@@ -23,6 +24,20 @@ def queryDB(col, value, limit):
     DBconn.close()
     return row_json
 
+def queryDB(col, value):
+    DBconn = sqlite3.connect('node1.db')
+    # This enables column access by name: row['column_name']
+    DBconn.row_factory = sqlite3.Row
+    queryCurs = DBconn.cursor()
+
+    queryCurs.execute('timestamp, originAddr, unit, id, value FROM {SQLtable} WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
+                        format(SQLtable=SQL_TABLE, SQLcol=col, SQLvalue=value))
+
+    row = queryCurs.fetchall()
+    row_json = [ dict(rec) for rec in row ]
+
+    DBconn.close()
+    return row_json
 
 def queryDBallStation():
     DBconn = sqlite3.connect('node1.db')

@@ -1,11 +1,12 @@
 from flask import Flask, jsonify, abort, make_response, url_for
 from flask.ext.httpauth import HTTPBasicAuth
 from createJSON import *
+from flask_cors import CORS, cross_origin
 
 auth = HTTPBasicAuth()
 
 app = Flask(__name__)
-
+CORS(app)
 
 
 def make_public_mdatum(mdatum):
@@ -31,11 +32,16 @@ def unauthorized():
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
+@app.route('/mdata/<int:id>', methods=['GET'])
+@auth.login_required
+def get_mdata(id):
+    query_result = queryDB('id', id)
+    return jsonify({'Messdaten': query_result})
 
 @app.route('/mdata/station/<int:station>/<int:limit>', methods=['GET'])
 @auth.login_required
 def get_mdataall(station,limit):
-    query_result = queryDB('originAddr',station,limit)
+    query_result = queryDBLimit('originAddr', station, limit)
     return jsonify({'Messdaten': query_result})
 
 @app.route('/mdata/station', methods=['GET'])
