@@ -1,7 +1,5 @@
-import sqlite3
 from flask import Flask, jsonify, abort, make_response, url_for
 from flask.ext.httpauth import HTTPBasicAuth
-from sqlobject import *
 from createJSON import *
 
 auth = HTTPBasicAuth()
@@ -34,16 +32,16 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@app.route('/mdata/station/<int:station>', methods=['GET'])
+@app.route('/mdata/station/<int:station>/<int:limit>', methods=['GET'])
 @auth.login_required
-def get_mdataall(station):
-    query_result = queryDB('messwerte','originAddr',station,1)
-    return jsonify({'Messdaten': [query_result]})
+def get_mdataall(station,limit):
+    query_result = queryDB('originAddr',station,limit)
+    return jsonify({'Messdaten': query_result})
 
 @app.route('/mdata/station', methods=['GET'])
 @auth.login_required
 def get_mStationAll():
-    query_result = queryDBallStation('messwerte')
+    query_result = queryDBallStation()
     return jsonify({'Stationen': [query_result]})
 
 
