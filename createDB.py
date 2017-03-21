@@ -1,5 +1,5 @@
 import sqlite3
-from constants import SQL_DB
+from config import *
 
 DBconn = sqlite3.connect(SQL_DB)
 queryCurs=DBconn.cursor()

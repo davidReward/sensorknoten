@@ -1,5 +1,6 @@
 import sqlite3
-from constants import SQL_DB
+from config import *
+
 
 
 #TODO: die letzten n messungen
@@ -16,7 +17,9 @@ def queryDBLimit(col, value, limit):
     queryCurs.execute('SELECT MAX(timestamp) AS timestamp, originAddr, unit, id, value FROM messwerte WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
                         format(SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
-
+    queryCurs.execute(
+        'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,id, value FROM messwerte INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
+        format(SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]
@@ -43,7 +46,7 @@ def queryDBallStation():
     DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
 
-    queryCurs.execute('SELECT originAddr FROM messwerte GROUP BY originAddr')
+    queryCurs.execute('SELECT originAddr, name , location, powerSaving FROM messwerte INNER JOIN stationen ON stationen.station_id = messwerte.originAddr GROUP BY originAddr')
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]

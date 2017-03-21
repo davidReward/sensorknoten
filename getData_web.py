@@ -2,6 +2,7 @@ from flask import Flask, jsonify, abort, make_response, url_for, request
 from flask.ext.httpauth import HTTPBasicAuth
 from createJSON import *
 from flask_cors import CORS, cross_origin
+from config import *
 
 auth = HTTPBasicAuth()
 
@@ -26,8 +27,8 @@ def make_public_mdatum(mdatum_id):
 
 @auth.get_password
 def get_password(username):
-    if username == 'tester':
-        return 'python'
+    if username == USERNAME:
+        return PASSWORD
     return None
 
 @auth.error_handler

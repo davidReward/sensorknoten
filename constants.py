@@ -1,1 +1,0 @@
-SQL_DB = 'node1.db'
