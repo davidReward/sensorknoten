@@ -4,13 +4,15 @@
 <head>
 <meta charset="utf-8" />
 <!--<script src="js/vendors/device.min.js"></script>-->
- <script src="js/vendors/jquery.min.js"></script>  
+ <script src="js/vendors/jquery.min.js"></script>
  <script src="js/vendors/bootstrap.min.js"></script> 
  
 
  
 <script src="js/vendors/angular.min.js"></script>
+<script src="js/vendors/i18n/angular-locale_de-de.min.js"></script>
 <script src="js/vendors/angular-route.min.js"></script>
+
 
 <script src="js/vendors/angular-animate.min.js"></script>
 <script src="js/vendors/angular-touch.min.js"></script>
@@ -22,6 +24,7 @@
 <!--Controller-->
 <script src="js/controllers/stationUebersichtCtrl.js"></script>
 <script src="js/controllers/stationCtrl.js"></script>
+<script src="js/controllers/grafikCtrl.js"></script>
 
 
 <!-- Service -->
@@ -62,7 +65,7 @@
 								href="#/stationen">Stationen</a></li>
 
 							<li ng-class="{active: $route.current.activetab == 'grafik'}"><a
-								href="#/grafik">Grafik</a></li>
+								 ng-click="changeRoute('/grafik')">Grafik</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li style="cursor: pointer"><a ng-click="logout()"><span class="fa fa-sign-out "></span>

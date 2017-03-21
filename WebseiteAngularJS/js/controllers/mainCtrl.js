@@ -1,7 +1,7 @@
 angular.module('wettEditor').controller(
             'mainCtrl',
-            [ '$rootScope', '$scope', '$filter', '$route' , 'alertService', '$window', '$uibModal', 
-                    function($rootScope, $scope, $filter, $route, alertService, $window, $uibModal )  {
+            [ '$rootScope', '$scope', '$filter', '$route' , 'alertService', '$window', '$location',
+                    function($rootScope, $scope, $filter, $route, alertService, $window, $location )  {
              			$scope.$route = $route;
              			
              			 $rootScope.closeAlert = alertService.closeAlert; 
@@ -50,7 +50,9 @@ angular.module('wettEditor').controller(
                  			 };
         				};
 
-         		        
+                        $scope.changeRoute =function (route) {
+                            $location.path(route);
+                        }
          		        
                     } ]);
 

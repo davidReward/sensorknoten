@@ -7,7 +7,7 @@ angular.module('wettEditor').controller(
 
             	$scope.sensorList = [];
 				
-            	//Vorlesung List laden
+            	//Station List laden
             	$scope.getStationNow = function() {
             		sensorDataService.getStationNow($routeParams.stationId).then(
 							function(response) {
@@ -27,9 +27,14 @@ angular.module('wettEditor').controller(
                     $location.path('/grafik/' + $scope.stationId + '/' + unitId );
 				}
 
-				$interval(function() {
+				//Intervall
+				$scope.stop = $interval(function() {
                     $scope.refreshData();
-				}, 30000);
+				}, 90000);
+
+				var dereg = $rootScope.$on('$locationChangeSuccess', function() {
+					$interval.cancel($scope.stop);
+				});
 	
 								
 						

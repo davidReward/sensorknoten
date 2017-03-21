@@ -7,14 +7,23 @@
 				    <table class="table table-hover">
 				    <thead>
 				    <tr>
-				        <th width="120">Stations Nr.</th>
-				        <th width="60">Aktuelle Werte</th>
+				        <th>Stations Nr.</th>
+				        <th>Name</th>
+				        <th>Ort</th>
+				        <th>Aktuelle Werte</th>
+				        <th>Energiesparmodus</th>
 				    </tr>
 				    </thead>
 				   <tbody>
 				        <tr ng-repeat="station in stationList.Stationen">
 				            <td ng-bind="station.originAddr"></td>
+							<td ng-bind="station.name"></td>
+							<td ng-bind="station.location"></td>
 				            <td> <button type="button" class="btn btn-default" ng-click="showAktuelleWerte(station.originAddr)">Aktuelle Werte</button></td>
+							<td >
+								<span ng-if="station.powerSaving == 1" class="glyphicon glyphicon-off" style="color: green"></span>
+								<span ng-if="station.powerSaving == 0" class="glyphicon glyphicon-off" style="color: red"></span>
+							</td>
 				        </tr> 
 				    </tbody>   				     
 				    </table>
