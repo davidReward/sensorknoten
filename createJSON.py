@@ -1,8 +1,6 @@
 import sqlite3
+from constants import SQL_DB
 
-#Constants
-SQL_DB = 'node1.db'
-SQL_TABLE = 'messwerte'
 
 #TODO: die letzten n messungen
 def queryDBLimit(col, value, limit):
@@ -16,8 +14,8 @@ def queryDBLimit(col, value, limit):
 
 
     for i in range(0,limit,1):
-        queryCurs.execute('SELECT MAX(timestamp)-{SQLlimit}, originAddr, unit, id, value FROM {SQLtable} WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
-                        format(SQLtable=SQL_TABLE, SQLcol=col, SQLvalue=value, SQLlimit=limit))
+        queryCurs.execute('SELECT MAX(timestamp)-{SQLlimit}, originAddr, unit, id, value FROM messwerte WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
+                        format(SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
         row = queryCurs.fetchall()
         row_json = [ dict(rec) for rec in row ]
@@ -30,7 +28,6 @@ def queryDB_id(id):
     # This enables column access by name: row['column_name']
     DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
-
     queryCurs.execute('SELECT * FROM messwerte where id=?', (id,))
 
     row = queryCurs.fetchall()
@@ -45,8 +42,7 @@ def queryDBallStation():
     DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
 
-    queryCurs.execute('SELECT originAddr FROM {SQLtable} GROUP BY originAddr'. \
-                      format(SQLtable=SQL_TABLE))
+    queryCurs.execute('SELECT originAddr FROM messwerte GROUP BY originAddr')
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]

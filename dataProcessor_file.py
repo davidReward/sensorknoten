@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import base64
 from struct import *
 from collections import namedtuple

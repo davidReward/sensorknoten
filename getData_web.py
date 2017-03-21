@@ -32,10 +32,10 @@ def unauthorized():
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
-@app.route('/mdata/', methods=['GET'])
+@app.route('/mdata/<int:id>', methods=['GET'])
 @auth.login_required
-def get_mdata():
-    query_result = queryDBLimit('originAddr', 400, 0)
+def get_mdata(id):
+    query_result = queryDB_id(str(id))
     return jsonify({'Messdaten': query_result})
 
 #TODO: Parameteruebergabe

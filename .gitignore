@@ -2,6 +2,5 @@
 .idea/
 receiver
 data
-*.db
 *.log
 *.pyc

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import time
 import base64
 import hashlib
