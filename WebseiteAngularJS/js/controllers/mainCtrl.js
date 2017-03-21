@@ -1,7 +1,7 @@
 angular.module('wettEditor').controller(
             'mainCtrl',
-            [ '$rootScope', '$scope', '$filter', '$route' , 'alertService', '$window', '$uibModal',
-                    function($rootScope, $scope, $filter, $route, alertService, $window, $uibModal)  {
+            [ '$rootScope', '$scope', '$filter', '$route' , 'alertService', '$window', '$uibModal', 
+                    function($rootScope, $scope, $filter, $route, alertService, $window, $uibModal )  {
              			$scope.$route = $route;
              			
              			 $rootScope.closeAlert = alertService.closeAlert; 

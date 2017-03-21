@@ -2,7 +2,7 @@
     	.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
         $routeProvider
             .when('/', {
-                redirectTo: '/home',
+                redirectTo: '/stationen',
             })
             // route for the semester page
             .when('/stationen', {
@@ -15,6 +15,16 @@
                 templateUrl : 'pages/station.html',
                 controller  : 'stationCtrl',
                 activetab: 'stationen'
+            })
+            .when('/grafik', {
+                templateUrl : 'pages/grafik.html',
+                controller  : 'grafikCtrl',
+                activetab: 'grafik'
+            })
+            .when('/grafik/:stationId/:unitId', {
+                templateUrl : 'pages/grafik.html',
+                controller  : 'grafikCtrl',
+                activetab: 'grafik'
             })
 	        .otherwise({
 	            templateUrl: 'pages/404.html',

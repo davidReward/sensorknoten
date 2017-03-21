@@ -241,3 +241,22 @@ table {
 .text-uppercase {
     text-transform: uppercase !important;
 }
+.arrowGrafikLink{
+    cursor: pointer;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+  .arrowGrafikLinkDiv{
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      padding: 5px;
+      height: 100%;
+      width: 100%;
+  }
+  .refreshButton{
+      cursor: pointer;
+      position: relative;
+      float: right;
+  }

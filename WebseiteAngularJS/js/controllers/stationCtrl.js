@@ -1,7 +1,7 @@
 angular.module('wettEditor').controller(
             'stationCtrl',
-            [ '$rootScope', '$scope', '$location', '$routeParams' ,'$filter','$http', '$window', 'alertService' , '$uibModal', 'sensorDataService', 
-                    function($rootScope, $scope, $location, $routeParams, $filter, $http, $window , alertService , $uibModal, sensorDataService) {
+            [ '$rootScope', '$scope', '$location', '$routeParams' ,'$filter','$http', '$window', 'alertService' , '$interval', 'sensorDataService',
+                    function($rootScope, $scope, $location, $routeParams, $filter, $http, $window , alertService , $interval,  sensorDataService) {
             	
             	$scope.stationId = $routeParams.stationId;
 
@@ -18,7 +18,18 @@ angular.module('wettEditor').controller(
 				};
 				
 				$scope.getStationNow($routeParams.stationId);
-            	
+
+				$scope.refreshData = function () {
+                    $scope.getStationNow($routeParams.stationId);
+                }
+
+				$scope.openGrafik = function(unitId){
+                    $location.path('/grafik/' + $scope.stationId + '/' + unitId );
+				}
+
+				$interval(function() {
+                    $scope.refreshData();
+				}, 30000);
 	
 								
 						

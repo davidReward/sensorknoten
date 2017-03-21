@@ -1,36 +1,40 @@
 <div class="container">
         <section style="padding-bottom: 50px; padding-top: 50px;">
-        		<h1>Station: <div ng-bind="stationId">Unbekannt</div></h1>
+        		<h1>Station: <span ng-bind="stationId"></span>
+                    <span class="refreshButton">
+                        <a data-toggle="tooltip" title="Aktualisieren">
+                            <i class="fa fa-refresh" aria-hidden="true" ng-click="refreshData()"></i>
+                        </a>
+                    </span>
+                </h1>
 				
-				
-				<div class="table-responsive">
-				    <table class="table table-hover">
-				    <thead>
-				    <tr>
-				        <th width="120">Stations Nr.</th>
-				        <th width="60">Aktuelle Werte</th>
-				    </tr>
-				    </thead>
-				   <tbody>
-				        <tr ng-repeat="sensor in sensorList.Messdaten">
-				            <td ng-bind="station.originAddr"></td>
-				            <td> <button type="button" class="btn btn-default" ng-click="showAktuelleWerte(station.originAddr)">Aktuelle Werte</button></td>
-				        </tr> 
-				    </tbody>   				     
-				    </table>
-					
-					
-				    </div>
-					
+			
 					<div class="row">
-						<div class="col-md-3" ng-repeat="sensor in sensorList.Messdaten">
+						<div class="col-md-4" ng-repeat="sensor in sensorList.Messdaten">
 						  <div class="widget">
 							<div class="widget-content padding-25 bg-white">
-							  <div class="counter counter-lg">
-								<span class="counter-number" ng-bind="(sensor.value | number: 1) + ' ' + sensor.unit">9999</span>
-								<div class="counter-label text-uppercase">Temperatur</div>
-							  </div>
-							</div>
+
+                                <div class="counter counter-lg" ng-if="(sensor.unit | unitFilter)">
+                                    <span class="counter-number" ng-bind="(sensor.value | number: 1) + ' ' + sensor.unit_name"></span>
+                                    <div class="counter-label text-uppercase" ng-bind="sensor.sensor"></div>
+                                </div>
+
+                                <div class="counter counter-lg" ng-if="!(sensor.unit | unitFilter)">
+							    	<span class="counter-number" ng-if="sensor.unit == 5 && sensor.value == 0">keine Bewegung</span>
+                                    <span class="counter-number" ng-if="sensor.unit == 5 && sensor.value == 1">Bewegung erkannt</span>
+                                    <span class="counter-number" ng-if="sensor.unit == 7 && sensor.value == 1">nass</span>
+                                    <span class="counter-number" ng-if="sensor.unit == 7 && sensor.value == 1">trocken</span>
+                                    <span class="counter-number" ng-if="(sensor.unit == 8 || sensor.unit == 9) && sensor.value == 0">geschlossen</span>
+                                    <span class="counter-number" ng-if="(sensor.unit == 8 || sensor.unit == 9) && sensor.value == 1">geöffnet</span>
+								    <div class="counter-label text-uppercase" >Reedkontakt</div>
+							    </div>
+
+
+                            </div>
+                            <div class="arrowGrafikLinkDiv">
+                                <a data-toggle="tooltip" title="Grafik anzeigen"> <i class="fa fa-arrow-right arrowGrafikLink" aria-hidden="true" ng-click="openGrafik(sensor.unit)"></i> </a>
+                            </div>
+
 						  </div>
 						</div>
 					</div>
