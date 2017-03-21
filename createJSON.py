@@ -18,18 +18,18 @@ def queryDB_station(station):
 
     DBconn.close()
     return row_json
-#TODO: implement functionality
-def queryDB_station_interval(station, begin, end):
+
+def queryDB_station_interval(station, unit, begin, end):
     DBconn = sqlite3.connect(SQL_DB)
     # This enables column access by name: row['column_name']
     DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
 
     queryCurs.execute(
-         'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,sensor ,id, value '
-         'FROM messwerte '
-         'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
-         'WHERE originAddr=? GROUP BY unit',(station,))
+        'SELECT timestamp, originAddr, unit,unit_name,sensor ,id, value '
+        'FROM messwerte '
+        'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
+        'WHERE originAddr=? AND unit=? AND timestamp BETWEEN ? AND ?', (station, unit,  begin, end,))
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]

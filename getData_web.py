@@ -39,20 +39,30 @@ def not_found(error):
 @auth.login_required
 def get_mdatum(mdatum_id):
     query_result = queryDB_id(mdatum_id)
-    return jsonify({'Messdaten': [make_public_mdatum(data) for data in query_result]  })
+    if len(query_result) != 0:
+        return jsonify({'Messdaten': [make_public_mdatum(data) for data in query_result]  })
+    abort(404)
+
 
 @app.route('/mdata/station/<int:station>', methods=['GET'])
 @auth.login_required
 def get_mdataall(station):
-    begin = request.args.get('begin')
-    end = request.args.get('end')
-    if begin is None and end is None:
-        query_result = queryDB_station(station)
+    query_result = queryDB_station(station)
+    if len(query_result) != 0:
         return jsonify({'Messdaten': [make_public_mdatum(data) for data in query_result]})
 
+    abort(404)
+
+@app.route('/mdata/station/<int:station>/<int:unit>', methods=['GET'])
+@auth.login_required
+def get_mdataUnit(station, unit):
+    begin = request.args.get('begin')
+    end = request.args.get('end')
+
     if begin is not None and end is not None:
-        query_result = queryDB_station_interval(station, begin, end)
-        return jsonify({'Messdaten':  [make_public_mdatum(data) for data in query_result]})
+        query_result = queryDB_station_interval(station, unit, begin, end)
+        if len(query_result) != 0:
+            return jsonify({'Messdaten':  [make_public_mdatum(data) for data in query_result]})
 
     abort(404)
 
@@ -62,7 +72,9 @@ def get_mdataall(station):
 @auth.login_required
 def get_mStationAll():
     query_result = queryDBallStation()
-    return jsonify({'Stationen': query_result})
+    if len(query_result) != 0:
+        return jsonify({'Stationen': query_result})
+    abort(404)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
