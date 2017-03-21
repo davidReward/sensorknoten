@@ -41,12 +41,22 @@ def get_mdatum(mdatum_id):
     query_result = queryDB_id(mdatum_id)
     return jsonify({'Messdaten': [make_public_mdatum(data) for data in query_result]  })
 
-#TODO: Parameteruebergabe
 @app.route('/mdata/station/<int:station>', methods=['GET'])
 @auth.login_required
 def get_mdataall(station):
-    query_result = queryDB_station(station)
-    return jsonify({'Messdaten':  [make_public_mdatum(data) for data in query_result]})
+    begin = request.args.get('begin')
+    end = request.args.get('end')
+    if begin is None and end is None:
+        query_result = queryDB_station(station)
+        return jsonify({'Messdaten': [make_public_mdatum(data) for data in query_result]})
+
+    if begin is not None and end is not None:
+        query_result = queryDB_station_interval(station, begin, end)
+        return jsonify({'Messdaten':  [make_public_mdatum(data) for data in query_result]})
+
+    abort(404)
+
+
 
 @app.route('/mdata/station', methods=['GET'])
 @auth.login_required
