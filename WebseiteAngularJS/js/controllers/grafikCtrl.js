@@ -11,7 +11,8 @@ angular.module('wettEditor').controller(
             $scope.aktuelleStationId = $routeParams.stationId;
             $scope.aktuelleStationIdBool = false;
 
-            $scope.aktuelleSensorId = $routeParams.unitId;
+            $scope.aktuelleSensorId  = $routeParams.unitId;
+
 
             $scope.zeitRaumBool =false;
 
@@ -19,6 +20,7 @@ angular.module('wettEditor').controller(
                 sensorDataService.getAllStation().then(
                     function(response) {
                         $scope.stationList = response.data;
+                        console.log($scope.stationList);
                         if($scope.aktuelleStationId != undefined){
                             $scope.getStationNow($scope.aktuelleStationId);
                             $scope.aktuelleStationIdBool = true;
@@ -35,7 +37,6 @@ angular.module('wettEditor').controller(
                 sensorDataService.getStationNow(stationId).then(
                     function(response) {
                         $scope.sensorList = response.data;
-                        console.log($scope.sensorList)
 
                         if($scope.aktuelleSensorId != undefined){
                             $scope.zeitRaumBool = true ;
@@ -48,8 +49,13 @@ angular.module('wettEditor').controller(
             };
 
             getSensorDataBetween = function() {
-                console.log($scope.aktuelleSensorId);
-                sensorDataService.getSensorDataBetween($scope.aktuelleStationId,$scope.aktuelleSensorId,$scope.startDate,$scope.endDate).then(
+                console.log($scope.startDate);
+                console.log($scope.endDate);
+
+                startDate = ($filter('number')(($scope.startDate.getTime() / 1000), 0)).replace(/\./g, '');
+                endDate = ($filter('number')(($scope.endDate.getTime() / 1000), 0)).replace(/\./g, '');
+
+                sensorDataService.getSensorDataBetween($scope.aktuelleStationId,$scope.aktuelleSensorId,startDate,endDate).then(
                     function(response) {
                         $scope.sensorDataList = response.data;
                         console.log($scope.sensorDataList)
@@ -68,8 +74,8 @@ angular.module('wettEditor').controller(
                 $scope.getStationNow($scope.aktuelleStationId);
                 $scope.aktuelleStationIdBool = true;
             }
-            $scope.changeSensor = function () {
-                console.log($scope.aktuelleSensorId);
+            $scope.changeSensor = function (unitID) {
+                $scope.aktuelleSensorId = unitID;
                 $scope.zeitRaumBool = true ;
             }
 
@@ -104,10 +110,18 @@ angular.module('wettEditor').controller(
 
             $scope.sensorDataList = null;
 
+            $scope.changeStartDate = function (startDate) {
+                $scope.startDate = startDate;
+            }
+            $scope.changeEndDate = function (endDate) {
+                $scope.endDate = endDate;
+            }
+
             //Grafik
             $scope.showGrafik =function () {
                 getSensorDataBetween();
             }
+
 
 
 
