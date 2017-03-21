@@ -14,11 +14,11 @@ def queryDBLimit(col, value, limit):
     #                   format(SQLtable=table, SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
 
-    queryCurs.execute('SELECT MAX(timestamp) AS timestamp, originAddr, unit, id, value FROM messwerte WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
-                        format(SQLcol=col, SQLvalue=value, SQLlimit=limit))
+    #queryCurs.execute('SELECT MAX(timestamp) AS timestamp, originAddr, unit, id, value FROM messwerte WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
+    #                    format(SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
     queryCurs.execute(
-        'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,id, value FROM messwerte INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
+        'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,sensor ,id, value FROM messwerte INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
         format(SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
     row = queryCurs.fetchall()
