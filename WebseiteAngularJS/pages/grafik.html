@@ -1,0 +1,42 @@
+<div class="container">
+    <section style="padding-bottom: 50px; padding-top: 50px;">
+        <h1>Grafik</h1>
+
+        <div class="row">
+            <label class="col-sm-2" for="stationId">Station ausw&aumlhlen:</label>
+            <div class="col-sm-2">
+                <select class="form-control" id="stationId" ng-model="aktuelleSemesterId" ng-change="changeSemester(semester.semesterId)">
+                    <option ng-repeat="semester in semesterList"
+                            ng-bind="semester.semesterName" value="{{semester.semesterId}}"></option>
+
+                </select>
+            </div>
+            <label class="col-sm-2" for="unitId">Sensor ausw&aumlhlen:</label>
+            <div class="col-sm-2">
+                <select class="form-control" id="unitId" ng-model="aktuelleSemesterId" ng-change="changeSemester(semester.semesterId)">
+                    <option ng-repeat="semester in semesterList"
+                            ng-bind="semester.semesterName" value="{{semester.semesterId}}"></option>
+
+                </select>
+            </div>
+            <label class="col-sm-2" for="anzDatenpunkte">Anzahl Datenpunkte ausw&aumlhlen:</label>
+            <div class="col-sm-2">
+                <select class="form-control" id="anzDatenpunkte" ng-model="aktuelleSemesterId" ng-change="changeSemester(semester.semesterId)">
+                    <option ng-repeat="semester in semesterList"
+                            ng-bind="semester.semesterName" value="{{semester.semesterId}}"></option>
+
+                </select>
+            </div>
+        </div>
+
+
+
+
+
+
+    </section>
+    <!-- SECTION END -->
+
+    <!-- CONATINER END -->
+
+</div>
