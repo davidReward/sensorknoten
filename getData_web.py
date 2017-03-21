@@ -8,8 +8,8 @@ auth = HTTPBasicAuth()
 app = Flask(__name__)
 CORS(app,supports_credentials=True)
 
-
-def make_public_mdatum(mdatum):
+#TODO: Delete
+def make_public_mdatum_old(mdatum):
     new_ressource = {}
     for field in mdatum:
         if field == 'id':
@@ -17,6 +17,12 @@ def make_public_mdatum(mdatum):
         else:
             new_ressource[field] = mdatum[field]
     return new_ressource
+
+def make_public_mdatum(mdatum_id):
+    new_ressource = {}
+    new_ressource['uri'] = url_for('get_mdatum', mdatum_id=mdatum_id)
+    return new_ressource
+
 
 @auth.get_password
 def get_password(username):
@@ -32,10 +38,12 @@ def unauthorized():
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
-@app.route('/mdata/<int:id>', methods=['GET'])
+@app.route('/mdata/<string:mdatum_id>', methods=['GET'])
 @auth.login_required
-def get_mdata(id):
-    query_result = queryDB_id(str(id))
+def get_mdatum(mdatum_id):
+    query_result = queryDB_id(mdatum_id)
+    #print url_for('get_mdatum', mdatum_id=mdatum_id)
+    print make_public_mdatum(mdatum_id)
     return jsonify({'Messdaten': query_result})
 
 #TODO: Parameteruebergabe

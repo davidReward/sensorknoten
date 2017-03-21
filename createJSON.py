@@ -13,12 +13,13 @@ def queryDBLimit(col, value, limit):
     #                   format(SQLtable=table, SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
 
-    for i in range(0,limit,1):
-        queryCurs.execute('SELECT MAX(timestamp)-{SQLlimit}, originAddr, unit, id, value FROM messwerte WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
+    queryCurs.execute('SELECT MAX(timestamp) AS timestamp, originAddr, unit, id, value FROM messwerte WHERE {SQLcol}={SQLvalue} GROUP BY unit'. \
                         format(SQLcol=col, SQLvalue=value, SQLlimit=limit))
 
-        row = queryCurs.fetchall()
-        row_json = [ dict(rec) for rec in row ]
+
+
+    row = queryCurs.fetchall()
+    row_json = [ dict(rec) for rec in row ]
 
     DBconn.close()
     return row_json
