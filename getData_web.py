@@ -9,19 +9,14 @@ auth = HTTPBasicAuth()
 app = Flask(__name__)
 CORS(app,supports_credentials=True)
 
-#TODO: Delete
-def make_public_mdatum_old(mdatum):
-    new_ressource = {}
-    for field in mdatum:
-        if field == 'id':
-            new_ressource['uri'] = url_for('get_mdatum', mdatum_id=mdatum['id'], _external=True)
-        else:
-            new_ressource[field] = mdatum[field]
-    return new_ressource
 
-def make_public_mdatum(mdatum_id):
+def make_public_mdatum(mdata):
     new_ressource = {}
-    new_ressource['uri'] = url_for('get_mdatum', mdatum_id=mdatum_id)
+    for field in mdata:
+        if field == 'id':
+            new_ressource['uri'] = url_for('get_mdatum', mdatum_id=mdata['id'], _external=True)
+        else:
+            new_ressource[field]= mdata[field]
     return new_ressource
 
 
@@ -39,20 +34,19 @@ def unauthorized():
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
+
 @app.route('/mdata/<string:mdatum_id>', methods=['GET'])
 @auth.login_required
 def get_mdatum(mdatum_id):
     query_result = queryDB_id(mdatum_id)
-    #print url_for('get_mdatum', mdatum_id=mdatum_id)
-    print make_public_mdatum(mdatum_id)
-    return jsonify({'Messdaten': query_result})
+    return jsonify({'Messdaten': [make_public_mdatum(data) for data in query_result]  })
 
 #TODO: Parameteruebergabe
 @app.route('/mdata/station/<int:station>', methods=['GET'])
 @auth.login_required
 def get_mdataall(station):
-    query_result = queryDBLimit('originAddr', station, 2)
-    return jsonify({'Messdaten': query_result})
+    query_result = queryDB_station(station)
+    return jsonify({'Messdaten':  [make_public_mdatum(data) for data in query_result]})
 
 @app.route('/mdata/station', methods=['GET'])
 @auth.login_required
@@ -60,8 +54,6 @@ def get_mStationAll():
     query_result = queryDBallStation()
     return jsonify({'Stationen': query_result})
 
-
 if __name__ == '__main__':
-    #print queryDB_id('e39a977d6bce4395cad34b00dfbf545d')
     app.run(host='0.0.0.0', debug=True)
 
