@@ -5,28 +5,60 @@
         <div class="row">
             <label class="col-sm-2" for="stationId">Station ausw&aumlhlen:</label>
             <div class="col-sm-2">
-                <select class="form-control" id="stationId" ng-model="aktuelleSemesterId" ng-change="changeSemester(semester.semesterId)">
-                    <option ng-repeat="semester in semesterList"
-                            ng-bind="semester.semesterName" value="{{semester.semesterId}}"></option>
+                <select class="form-control" id="stationId" ng-model="aktuelleStationId" ng-change="changeStation()">
+                    <option ng-repeat="station in stationList.Stationen"
+                            ng-bind="station.name" value="{{station.originAddr}}"></option>
 
                 </select>
             </div>
-            <label class="col-sm-2" for="unitId">Sensor ausw&aumlhlen:</label>
+
+            <div ng-if="aktuelleStationIdBool">
+                <label class="col-sm-2" for="unitId">Sensor ausw&aumlhlen:</label>
+                <div class="col-sm-2">
+                    <select class="form-control" id="unitId" ng-model="aktuelleSensorId" ng-options="obj.unit as obj.sensor for obj in sensorList.Messdaten" ng-change="changeSensor(aktuelleSensorId)">
+
+                    </select>
+                </div>
+            </div>
+
+            </div>
+
+        <div class="row" ng-if="zeitRaumBool" style="margin-top: 20px;">
+            <label class="col-sm-2">Anzeigen von:</label>
             <div class="col-sm-2">
-                <select class="form-control" id="unitId" ng-model="aktuelleSemesterId" ng-change="changeSemester(semester.semesterId)">
-                    <option ng-repeat="semester in semesterList"
-                            ng-bind="semester.semesterName" value="{{semester.semesterId}}"></option>
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="startDate" ng-change="changeStartDate(startDate)" is-open="popup1.opened" datepicker-options="dateOptions1" ng-required="true" close-text="Schließen"  />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
 
-                </select>
+                <uib-timepicker ng-model="startDate" show-meridian="false" max="endDate" style="background-color: transparent;" ng-change="changeStartDate(startDate)"></uib-timepicker>
             </div>
-            <label class="col-sm-2" for="anzDatenpunkte">Anzahl Datenpunkte ausw&aumlhlen:</label>
+
+            <div class="col-sm-1">
+                <p>bis</p>
+            </div>
             <div class="col-sm-2">
-                <select class="form-control" id="anzDatenpunkte" ng-model="aktuelleSemesterId" ng-change="changeSemester(semester.semesterId)">
-                    <option ng-repeat="semester in semesterList"
-                            ng-bind="semester.semesterName" value="{{semester.semesterId}}"></option>
-
-                </select>
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="endDate" ng-change="changeEndDate(endDate)" is-open="popup2.opened" datepicker-options="dateOptions2" ng-required="true" close-text="Schließen"  />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+                <uib-timepicker ng-model="endDate" show-meridian="false" min="startDate" style="background-color: transparent;" ng-change="changeEndDate(endDate)"></uib-timepicker>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary" ng-disabled="!aktuelleStationIdBool && !zeitRaumBool" ng-click="showGrafik()">Grafik anzeigen</button>
+            </div>
+
+        </div>
+
+        <!--Grafik-->
+        <div class="row" style="padding-top: 15px" ng-if="showGrafikBool">
+            <date-time-chart data="dataTest" options="options2"></date-time-chart>
         </div>
 
 
