@@ -58,7 +58,7 @@ angular.module('wettEditor').controller(
                 sensorDataService.getSensorDataBetween($scope.aktuelleStationId,$scope.aktuelleSensorId,startDate,endDate).then(
                     function(response) {
                         $scope.sensorDataList = response.data;
-                        console.log($scope.sensorDataList)
+                        createSensorData();
                     }, function(response) {
                         alertService.add("warning", response.data.errorMessage);
                     });
@@ -122,7 +122,58 @@ angular.module('wettEditor').controller(
                 getSensorDataBetween();
             }
 
+            createSensorData = function () {
+                console.log($scope.dataTest);
+                dataTest = {
+                    name: '\'Station: ' + $scope.aktuelleStationId + ' Unit: ' + $scope.aktuelleSensorId + '\'',
+                    data: []
+                };
+                angular.forEach($scope.sensorDataList.Messdaten, function(value, key){
+                    console.log(value);
+                    array1 = [];
+                    array1.push( value.timestamp);
+                    array1.push( parseFloat(($filter('number')(value.value, 1)).replace(/\,/g, '.')));
+                    dataTest.data.push(array1);
 
+                });
+                $scope.dataTest = [];
+                $scope.dataTest.push(dataTest);
+                console.log($scope.dataTest);
+            }
+
+
+            $scope.options2 = {
+                title: 'Sensor 1234',
+                subtitle: 'SUbttitle 12',
+                width: 900
+            };
+
+            $scope.dataTest = [{
+                name: 'Winter 2012-2013',
+                // Define the data points. All series have a dummy year
+                // of 1970/71 in order to be compared on the same x axis. Note
+                // that in JavaScript, months start at 0 for January, 1 for February etc.
+                data: [
+                    [Date.UTC(1970, 9, 21), 0],
+                    [Date.UTC(1970, 10, 4), 0.28],
+                    [Date.UTC(1970, 10, 9), 0.25],
+                    [Date.UTC(1970, 10, 27), 0.2],
+                    [Date.UTC(1970, 11, 2), 0.28],
+                    [Date.UTC(1970, 11, 26), 0.28],
+                    [Date.UTC(1970, 11, 29), 0.47],
+                    [Date.UTC(1971, 0, 11), 0.79],
+                    [Date.UTC(1971, 0, 26), 0.72],
+                    [Date.UTC(1971, 1, 3), 1.02],
+                    [Date.UTC(1971, 1, 11), 1.12],
+                    [Date.UTC(1971, 1, 25), 1.2],
+                    [Date.UTC(1971, 2, 11), 1.18],
+                    [Date.UTC(1971, 3, 11), 1.19],
+                    [Date.UTC(1971, 4, 1), 1.85],
+                    [Date.UTC(1971, 4, 5), 2.22],
+                    [Date.UTC(1971, 4, 19), 1.15],
+                    [Date.UTC(1971, 5, 3), 0]
+                ]
+            }]
 
 
         } ]);
