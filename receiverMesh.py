@@ -15,7 +15,6 @@ pipes = ["1Node", "2Node"]
 DBconn = sqlite3.connect('/home/pi/srv/node1.db')
 queryCurs=DBconn.cursor()
 
-
 def signal_handler(signal, frame):
     print('Closing db connection...')
     DBconn.close()
