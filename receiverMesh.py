@@ -12,9 +12,8 @@ irq_gpio_pin = None
 radio = RF24(22, 0)
 pipes = ["1Node", "2Node"]
 
-DBconn = sqlite3.connect('node1.db')
+DBconn = sqlite3.connect('/home/pi/srv/node1.db')
 queryCurs=DBconn.cursor()
-
 
 def signal_handler(signal, frame):
     print('Closing db connection...')
