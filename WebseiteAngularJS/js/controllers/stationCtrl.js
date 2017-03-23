@@ -30,7 +30,7 @@ angular.module('wettEditor').controller(
 				//Intervall
 				$scope.stop = $interval(function() {
                     $scope.refreshData();
-				}, 90000);
+				}, 30000);
 
 				var dereg = $rootScope.$on('$locationChangeSuccess', function() {
 					$interval.cancel($scope.stop);

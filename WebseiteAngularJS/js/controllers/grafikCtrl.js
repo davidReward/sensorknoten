@@ -31,7 +31,7 @@ angular.module('wettEditor').controller(
                         }
 
                     }, function(response) {
-                        alertService.add("warning", response.data.errorMessage);
+                        alertService.add("warning", response.data.error);
                     });
             };
 
@@ -48,7 +48,7 @@ angular.module('wettEditor').controller(
                         }
 
                     }, function(response) {
-                        alertService.add("warning", response.data.errorMessage);
+                        alertService.add("warning", response.data.error);
                     });
             };
 
@@ -59,12 +59,18 @@ angular.module('wettEditor').controller(
                 startDate = ($filter('number')(($scope.startDate.getTime() / 1000), 0)).replace(/\./g, '');
                 endDate = ($filter('number')(($scope.endDate.getTime() / 1000), 0)).replace(/\./g, '');
 
+                $scope.options2 = {
+                    title: 'StationId: ' + $scope.aktuelleStationId,
+                    subtitle: 'UnitId: ' + $scope.aktuelleSensorId ,
+                    width: 900
+                };
+
                 sensorDataService.getSensorDataBetween($scope.aktuelleStationId,$scope.aktuelleSensorId,startDate,endDate).then(
                     function(response) {
                         $scope.sensorDataList = response.data;
                         createSensorData();
                     }, function(response) {
-                        alertService.add("warning", response.data.errorMessage);
+                        alertService.add("warning", response.data.error);
                     });
             };
 
@@ -135,24 +141,27 @@ angular.module('wettEditor').controller(
                     data: []
                 };
                 angular.forEach($scope.sensorDataList.Messdaten, function(value, key){
-                    array1 = [];
-                    array1.push( value.timestamp);
-                    array1.push( parseFloat(($filter('number')(value.value, 1)).replace(/\,/g, '.')));
-                    dataTest.data.push(array1);
 
+                    if(value.value != null){
+                        array1 = [];
+                        array1.push( value.timestamp);
+                        array1.push( parseFloat(($filter('number')(value.value, 1)).replace(/\,/g, '.')));
+                        dataTest.data.push(array1);
+                    }
                 });
                 $scope.dataTest = [];
                 $scope.dataTest.push(dataTest);
 
-                $scope.options2 = {
-                    title: 'StationId: ' + $scope.aktuelleStationId,
-                    subtitle: 'UnitId: ' + $scope.aktuelleSensorId ,
-                    width: 900
-                };
+
+                console.log($scope.options2)
             }
 
+            $scope.options2 = {
+                title: 'Station: ' + $scope.aktuelleStationId,
+                subtitle: 'Unit: ' + $scope.aktuelleSensorId ,
+                width: 900
+            };
 
-            $scope.options2 = {}
 
             $scope.dataTest = [];
 

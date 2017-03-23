@@ -32,7 +32,7 @@ def unauthorized():
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
+    return make_response(jsonify({'error': 'Keine Messung in dem angegebenen Zeitraum gefunden'}), 404)
 
 
 @app.route('/mdata/<string:mdatum_id>', methods=['GET'])
