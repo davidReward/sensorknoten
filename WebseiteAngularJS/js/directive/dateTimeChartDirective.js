@@ -27,18 +27,18 @@ angular.module('wettEditor').directive('dateTimeChart',[ function () {
                         year: '%b'
                     },
                     title: {
-                        text: 'Date'
+                        text: 'Datum'
                     }
                 },
                 yAxis: {
                     title: {
-                        text: 'Snow depth (m)'
+                        text: scope.options.sensorName + ' ( '+ scope.options.einheit + ' )'
                     },
                     min: 0
                 },
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+                    pointFormat: '{point.x:%e. %b %H:%M}: {point.y:.2f}' + scope.options.einheit
                 },
 
                 plotOptions: {
@@ -50,7 +50,7 @@ angular.module('wettEditor').directive('dateTimeChart',[ function () {
                 }
             };
             if (scope.options.jsonUrl != undefined) {
-                ahcTimeDataWithIrregularIntervalsLineService.getData(scope.options.jsonUrl).success(function (data) {
+                dateTimeChart.getData(scope.options.jsonUrl).success(function (data) {
                     scope.chartConfig.series = data;
                     scope.drawChart();
                 });
