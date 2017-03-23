@@ -14,7 +14,8 @@ angular.module('wettEditor').controller(
 							function(response) {
 								$scope.stationList = response.data;
 							}, function(response) {
-								alertService.add("warning", response.data.errorMessage);
+                                $rootScope.handlingError(response);
+								alertService.add("warning", response.data.error);
 							});
 				};
 				
