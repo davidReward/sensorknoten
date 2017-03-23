@@ -141,11 +141,13 @@ angular.module('wettEditor').controller(
                     data: []
                 };
                 angular.forEach($scope.sensorDataList.Messdaten, function(value, key){
-                    array1 = [];
-                    array1.push( value.timestamp);
-                    array1.push( parseFloat(($filter('number')(value.value, 1)).replace(/\,/g, '.')));
-                    dataTest.data.push(array1);
 
+                    if(value.value != null){
+                        array1 = [];
+                        array1.push( value.timestamp);
+                        array1.push( parseFloat(($filter('number')(value.value, 1)).replace(/\,/g, '.')));
+                        dataTest.data.push(array1);
+                    }
                 });
                 $scope.dataTest = [];
                 $scope.dataTest.push(dataTest);
