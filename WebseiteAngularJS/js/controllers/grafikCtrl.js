@@ -155,7 +155,7 @@ angular.module('wettEditor').controller(
                     if(value.value != null){
                         array1 = [];
                         array1.push( value.timestamp * 1000);
-                        array1.push( parseFloat(($filter('number')(value.value, 1)).replace(/\,/g, '.')));
+                        array1.push( parseFloat((($filter('number')(value.value, 1)).replace(/\,/g, '.')).replace(/\./g, ','))) ;
                         dataTest.data.push(array1);
                     }
                 });
