@@ -53,16 +53,26 @@ angular.module('wettEditor').controller(
             };
 
             getSensorDataBetween = function() {
-                console.log($scope.startDate);
-                console.log($scope.endDate);
-
                 startDate = ($filter('number')(($scope.startDate.getTime() / 1000), 0)).replace(/\./g, '');
                 endDate = ($filter('number')(($scope.endDate.getTime() / 1000), 0)).replace(/\./g, '');
 
+                einheit_t = 'Error';
+                sensorName_t = 'Error'
+
+                angular.forEach($scope.sensorList.Messdaten, function(value, key) {
+                    if($scope.aktuelleSensorId == value.unit){
+                        console.log(value);
+                        einheit_t = value.unit_name;
+                        sensorName_t = value.sensor;
+                    }
+                })
+
                 $scope.options2 = {
                     title: 'StationId: ' + $scope.aktuelleStationId,
-                    subtitle: 'UnitId: ' + $scope.aktuelleSensorId ,
-                    width: 900
+                    subtitle: sensorName_t,
+                    width: 1100,
+                    einheit: einheit_t,
+                    sensorName: sensorName_t
                 };
 
                 sensorDataService.getSensorDataBetween($scope.aktuelleStationId,$scope.aktuelleSensorId,startDate,endDate).then(
@@ -144,8 +154,8 @@ angular.module('wettEditor').controller(
 
                     if(value.value != null){
                         array1 = [];
-                        array1.push( value.timestamp);
-                        array1.push( parseFloat(($filter('number')(value.value, 1)).replace(/\,/g, '.')));
+                        array1.push( value.timestamp * 1000);
+                        array1.push( parseFloat((($filter('number')(value.value, 1)).replace(/\,/g, '.')).replace(/\./g, ','))) ;
                         dataTest.data.push(array1);
                     }
                 });

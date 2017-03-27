@@ -36,6 +36,7 @@
 <!-- Service -->
 <script src="js/services/sensorDataService.js"></script>
 <script src="js/services/alertService.js"></script>
+<script src="js/services/myAuthFactory.js"></script>
 
 
 <!-- Filter -->
@@ -54,6 +55,7 @@
 
 <body>
 	<div ng-controller="mainCtrl">
+		<div ng-if="userGlobal.loggedIn">
 			<nav class="navbar navbar-inverse"
 				ng-class="{hidden: $route.current.activetab == 'startseite'}">
 				<div class="container-fluid">
@@ -87,11 +89,24 @@
 					close="closeAlert($index)">{{alert.msg}}</uib-alert>
 			</div>	
 			<div class="content" ng-view></div>
+		</div>
 
-		
+		<div class="container" ng-if="!userGlobal.loggedIn">
+
+			<form class="form-signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
+				<label for="inputUserName" class="sr-only">Nutzername</label>
+				<input type="text" id="inputUserName" class="form-control" placeholder="Nutzername" ng-model="userGlobal.userName" required autofocus>
+				<label for="inputPassword" class="sr-only">Passwort</label>
+				<input type="password" id="inputPassword" class="form-control" placeholder="Passwort"  ng-model="userGlobal.passwort" required>
+
+				<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
+			</form>
+
+		</div> <!-- /container -->
 
 
-</div>
+	</div>
 </body>
 
 

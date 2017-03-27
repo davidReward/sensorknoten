@@ -2,7 +2,7 @@ angular.module('wettEditor').service('sensorDataService',[ '$http', '$location' 
 															function($http , $location) {
     var srv = {};
 
-    srv._baseUrl = $location.protocol() + '://' + $location.host() + ':' + '5000' + '/mdata';
+    srv._baseUrl = $location.protocol() + '://' + $location.host() + ':' + '3306' + '/mdata';
 
     //get User
     srv.getAllStation = function() {
