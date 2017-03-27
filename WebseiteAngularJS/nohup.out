@@ -1,0 +1,69 @@
+172.16.57.189 - - [22/Mar/2017 20:37:34] "GET / HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:35] "GET /js/vendors/jquery.min.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:35] "GET /js/vendors/bootstrap.min.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:35] "GET /js/vendors/angular.min.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:35] "GET /js/vendors/i18n/angular-locale_de-de.min.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:35] "GET /js/vendors/angular-animate.min.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:35] "GET /js/vendors/angular-route.min.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:35] "GET /js/vendors/angular-touch.min.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/vendors/ui-bootstrap-tpls-1.3.2.min.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/app.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/controllers/mainCtrl.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/directive/dateTimeChartDirective.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/controllers/stationUebersichtCtrl.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/controllers/stationCtrl.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/services/sensorDataService.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/controllers/grafikCtrl.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/services/alertService.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /js/filter/unitFilter.js HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /css/bootstrap.min.css HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /css/bootstrap-flat.min.css HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /css/textAngular.css HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /css/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:36] "GET /css/extra.css HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:37] code 404, message File not found
+172.16.57.189 - - [22/Mar/2017 20:37:37] "GET /js/vendors/angular.min.js.map HTTP/1.1" 404 -
+172.16.57.189 - - [22/Mar/2017 20:37:37] code 404, message File not found
+172.16.57.189 - - [22/Mar/2017 20:37:37] "GET /js/vendors/i18n/angular-locale_de-de.min.js.map HTTP/1.1" 404 -
+172.16.57.189 - - [22/Mar/2017 20:37:37] code 404, message File not found
+172.16.57.189 - - [22/Mar/2017 20:37:37] "GET /js/vendors/angular-route.min.js.map HTTP/1.1" 404 -
+172.16.57.189 - - [22/Mar/2017 20:37:37] code 404, message File not found
+172.16.57.189 - - [22/Mar/2017 20:37:37] "GET /js/vendors/angular-animate.min.js.map HTTP/1.1" 404 -
+172.16.57.189 - - [22/Mar/2017 20:37:37] code 404, message File not found
+172.16.57.189 - - [22/Mar/2017 20:37:37] "GET /js/vendors/angular-touch.min.js.map HTTP/1.1" 404 -
+172.16.57.189 - - [22/Mar/2017 20:37:37] "GET /css/font-awesome/fonts/fontawesome-webfont.woff2?v=4.5.0 HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:37] "GET /pages/stationList.html HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:38] "GET /fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:38] "GET /css/extra.css HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:39] "GET /css/bootstrap.min.css HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:39] "GET /css/bootstrap.min.css.map HTTP/1.1" 200 -
+172.16.57.189 - - [22/Mar/2017 20:37:51] "GET /pages/station.html HTTP/1.1" 200 -
+203.113.10.12 - - [22/Mar/2017 20:38:11] code 404, message File not found
+203.113.10.12 - - [22/Mar/2017 20:38:11] "HEAD /phpmyadmin/index.php HTTP/1.1" 404 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET / HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/vendors/jquery.min.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/vendors/bootstrap.min.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/vendors/i18n/angular-locale_de-de.min.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/vendors/angular.min.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /css/bootstrap.min.css HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /css/bootstrap-flat.min.css HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /css/textAngular.css HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /css/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /css/extra.css HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/vendors/angular-route.min.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/vendors/angular-animate.min.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/vendors/angular-touch.min.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/vendors/ui-bootstrap-tpls-1.3.2.min.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/app.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/controllers/mainCtrl.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/directive/dateTimeChartDirective.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/controllers/stationUebersichtCtrl.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/controllers/stationCtrl.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/controllers/grafikCtrl.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/services/sensorDataService.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/services/alertService.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /js/filter/unitFilter.js HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /pages/stationList.html HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:03] "GET /css/font-awesome/fonts/fontawesome-webfont.woff2?v=4.5.0 HTTP/1.1" 200 -
+172.16.59.166 - - [22/Mar/2017 20:41:14] "GET /pages/grafik.html HTTP/1.1" 200 -
+201.97.247.7 - - [22/Mar/2017 21:24:21] "GET / HTTP/1.0" 200 -

@@ -4,4 +4,4 @@ receiver
 data
 *.log
 *.pyc
-createJSON.pyc 
+*.sock 
