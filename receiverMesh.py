@@ -1,18 +1,19 @@
 import time
 import base64
 import hashlib
-import sqlite3
+import mysql.connector as mdb
 import signal
 import sys
 from RF24 import *
 from struct import *
+from config import *
 
 irq_gpio_pin = None
 
 radio = RF24(22, 0)
 pipes = ["1Node", "2Node"]
 
-DBconn = sqlite3.connect('/home/pi/srv/node1.db')
+DBconn = mdb.connect(**config)
 queryCurs=DBconn.cursor()
 
 def signal_handler(signal, frame):
@@ -37,7 +38,7 @@ def setup():
 
 def writeToDatabase(ID_hashed, originAddr, value, unit):
     timeStamp = int(time.time())
-    queryCurs.execute('''INSERT INTO messwerte (id,originAddr,value,unit,timestamp)
+    queryCurs.execute('''INSERT IGNORE INTO messwerte (id,originAddr,value,unit,timestamp)
     VALUES (?,?,?,?,?)''', (ID_hashed, originAddr, value, unit, timeStamp))
     DBconn.commit()
 
