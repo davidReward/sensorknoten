@@ -1,10 +1,10 @@
-import sqlite3
+import mysql.connector as mdb
 from config import *
 
 def queryDB_station(station):
-    DBconn = sqlite3.connect(SQL_DB)
+    DBconn = mdb.connect(**config)
     # This enables column access by name: row['column_name']
-    DBconn.row_factory = sqlite3.Row
+    #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
 
     queryCurs.execute(
@@ -20,9 +20,9 @@ def queryDB_station(station):
     return row_json
 
 def queryDB_station_interval(station, unit, begin, end):
-    DBconn = sqlite3.connect(SQL_DB)
+    DBconn = mdb.connect(SQL_DB)
     # This enables column access by name: row['column_name']
-    DBconn.row_factory = sqlite3.Row
+    #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
 
     queryCurs.execute(
@@ -39,9 +39,9 @@ def queryDB_station_interval(station, unit, begin, end):
 
 
 def queryDB_id(id):
-    DBconn = sqlite3.connect(SQL_DB)
+    DBconn = mdb.connect(SQL_DB)
     # This enables column access by name: row['column_name']
-    DBconn.row_factory = sqlite3.Row
+    #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
     queryCurs.execute(
         'SELECT * '
@@ -53,9 +53,9 @@ def queryDB_id(id):
     return row_json
 
 def queryDBallStation():
-    DBconn = sqlite3.connect(SQL_DB)
+    DBconn = mdb.connect(SQL_DB)
     # This enables column access by name: row['column_name']
-    DBconn.row_factory = sqlite3.Row
+    #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
     queryCurs.execute(
         'SELECT originAddr, name , location, powerSaving '
