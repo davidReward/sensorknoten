@@ -77,4 +77,4 @@ def get_mStationAll():
     abort(404)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=3306, debug=True)
+    app.run(host='0.0.0.0',port=3305, debug=True)
