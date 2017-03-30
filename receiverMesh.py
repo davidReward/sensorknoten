@@ -39,7 +39,7 @@ def setup():
 def writeToDatabase(ID_hashed, originAddr, value, unit):
     timeStamp = int(time.time())
     queryCurs.execute('''INSERT IGNORE INTO messwerte (id,originAddr,value,unit,timestamp)
-    VALUES (?,?,?,?,?)''', (ID_hashed, originAddr, value, unit, timeStamp))
+    VALUES (%s,%s,%s,%s,%s)''', (ID_hashed, originAddr, value, unit, timeStamp))
     DBconn.commit()
 
 def genearteID_hashed(stationID, messageID, timeID):
