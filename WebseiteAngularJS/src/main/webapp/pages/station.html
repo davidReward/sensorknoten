@@ -1,0 +1,51 @@
+<div class="container">
+        <section style="padding-bottom: 50px; padding-top: 50px;">
+        		<h1>Station: <span ng-bind="stationId"></span>
+                    <span class="refreshButton">
+                        <a data-toggle="tooltip" title="Aktualisieren">
+                            <i class="fa fa-refresh" aria-hidden="true" ng-click="refreshData()"></i>
+                        </a>
+                    </span>
+                </h1>
+
+			
+					<div class="row">
+						<div class="col-md-4" ng-repeat="sensor in sensorList.Messdaten">
+						  <div class="widget">
+                            <div class="timestamp bg-white">
+                                <div class="counter-label text-uppercase" ng-bind="(sensor.timestamp * 1000) | date:'dd.MM.yyyy HH:mm'  "></div>
+                            </div>
+							<div class="widget-content padding-25 bg-white">
+
+                                <div class="counter counter-lg" ng-if="(sensor.unit | unitFilter)">
+                                    <span class="counter-number" ng-bind="(sensor.value | number: 1) + ' ' + sensor.unit_name"></span>
+                                    <div class="counter-label text-uppercase" ng-bind="sensor.sensor"></div>
+                                </div>
+
+                                <div class="counter counter-lg" ng-if="!(sensor.unit | unitFilter)">
+							    	<span class="counter-number" ng-if="sensor.unit == 5 && sensor.value == 0">keine Bewegung</span>
+                                    <span class="counter-number" ng-if="sensor.unit == 5 && sensor.value == 1">Bewegung erkannt</span>
+                                    <span class="counter-number" ng-if="sensor.unit == 7 && sensor.value == 1">nass</span>
+                                    <span class="counter-number" ng-if="sensor.unit == 7 && sensor.value == 1">trocken</span>
+                                    <span class="counter-number" ng-if="(sensor.unit == 8 || sensor.unit == 9) && sensor.value == 0">geschlossen</span>
+                                    <span class="counter-number" ng-if="(sensor.unit == 8 || sensor.unit == 9) && sensor.value == 1">geöffnet</span>
+								    <div class="counter-label text-uppercase" ng-bind="sensor.sensor"></div>
+							    </div>
+
+
+                            </div>
+                            <div class="arrowGrafikLinkDiv">
+                                <a data-toggle="tooltip" title="Grafik anzeigen"> <i class="fa fa-line-chart arrowGrafikLink" aria-hidden="true" ng-click="openGrafik(sensor.unit)"></i> </a>
+                            </div>
+
+						  </div>
+						</div>
+					</div>
+        </section>
+        <!-- SECTION END -->
+    
+    <!-- CONATINER END -->
+  	
+</div>
+
+
