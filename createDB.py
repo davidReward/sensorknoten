@@ -2,7 +2,7 @@ import MySQLdb as mdb
 from config import *
 
 #DBconn = sqlite3.connect(SQL_DB)
-DBconn = mdb.connect('localhost', 'root', 'hallotest123' 'node1')
+DBconn = mdb.connect('sensorknoteniot.it.dh-karlsruhe.de:3306', 'jan', 'hallotest123' 'node1')
 
 queryCurs=DBconn.cursor()
 
