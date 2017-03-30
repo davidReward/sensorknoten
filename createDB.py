@@ -7,7 +7,7 @@ DBconn = mdb.connect('localhost', 'jan', 'hallotest123' 'node1')
 queryCurs=DBconn.cursor()
 
 queryCurs.execute('''CREATE TABLE messwerte
-(id CHAR(32) PRIMARY KEY ON CONFLICT IGNORE, originAddr INTEGER, value DOUBLE, unit INTEGER, timestamp INTEGER)''')
+(id CHAR(32) PRIMARY KEY, originAddr INTEGER, value DOUBLE, unit INTEGER, timestamp INTEGER)''')
 
 queryCurs.execute('''CREATE TABLE stationen
 (station_id INTEGER PRIMARY KEY, name VARCHAR(16), location VARCHAR(32), powerSaving BOOL )''')
