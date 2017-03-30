@@ -1,9 +1,8 @@
-import sqlite3
-import pyodbc
+import MySQLdb as mdb
 from config import *
 
 #DBconn = sqlite3.connect(SQL_DB)
-DBconn = pyodbc.connect(connString)
+DBconn = mdb.connect(connString)
 
 queryCurs=DBconn.cursor()
 
