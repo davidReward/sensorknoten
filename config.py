@@ -8,3 +8,9 @@ config = {
 	'host': '127.0.0.1',
 	'database':'node1',
 	}
+configRaspi = {
+	'user':'jan',
+	'password':'hallotest123',
+	'host': 'sensorknoteniot.it.dh-karlsruhe.de',
+	'database':'node1',
+	}

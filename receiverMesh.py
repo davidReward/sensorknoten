@@ -13,7 +13,7 @@ irq_gpio_pin = None
 radio = RF24(22, 0)
 pipes = ["1Node", "2Node"]
 
-DBconn = mdb.connect(**config)
+DBconn = mdb.connect(**configRaspi)
 queryCurs=DBconn.cursor()
 
 def signal_handler(signal, frame):
