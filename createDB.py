@@ -1,7 +1,10 @@
 import sqlite3
+import pyodbc
 from config import *
 
-DBconn = sqlite3.connect(SQL_DB)
+#DBconn = sqlite3.connect(SQL_DB)
+DBconn = pyodbc.connect(connString)
+
 queryCurs=DBconn.cursor()
 
 queryCurs.execute('''CREATE TABLE messwerte
