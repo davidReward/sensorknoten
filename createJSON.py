@@ -8,7 +8,7 @@ def queryDB_station(station):
     queryCurs = DBconn.cursor()
 
     queryCurs.execute(
-         'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,sensor ,id, value '
+         'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id), ANY_VALUE(value) '
          'FROM messwerte '
          'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
          'WHERE originAddr=? GROUP BY unit',(station,))
