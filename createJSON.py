@@ -11,7 +11,7 @@ def queryDB_station(station):
          'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id), ANY_VALUE(value) '
          'FROM messwerte '
          'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
-         'WHERE originAddr=? GROUP BY unit',(station,))
+         'WHERE originAddr=%s GROUP BY unit',(station,))
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]
@@ -29,7 +29,7 @@ def queryDB_station_interval(station, unit, begin, end):
         'SELECT timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id), ANY_VALUE(value) '
         'FROM messwerte '
         'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
-        'WHERE originAddr=? AND unit=? AND timestamp BETWEEN ? AND ?', (station, unit,  begin, end,))
+        'WHERE originAddr=%s AND unit=%s AND timestamp BETWEEN %s AND %s', (station, unit,  begin, end,))
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]
