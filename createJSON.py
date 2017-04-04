@@ -26,7 +26,7 @@ def queryDB_station_interval(station, unit, begin, end):
     queryCurs = DBconn.cursor()
 
     queryCurs.execute(
-        'SELECT timestamp, originAddr, unit,unit_name,sensor ,id, value '
+        'SELECT timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id), ANY_VALUE(value) '
         'FROM messwerte '
         'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
         'WHERE originAddr=? AND unit=? AND timestamp BETWEEN ? AND ?', (station, unit,  begin, end,))
