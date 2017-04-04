@@ -26,7 +26,7 @@ def queryDB_station_interval(station, unit, begin, end):
     queryCurs = DBconn.cursor()
 
     queryCurs.execute(
-        'SELECT timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id), ANY_VALUE(value) '
+        'SELECT timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id) AS id, ANY_VALUE(value) AS value '
         'FROM messwerte '
         'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
         'WHERE originAddr=%s AND unit=%s AND timestamp BETWEEN %s AND %s', (station, unit,  begin, end,))
@@ -44,7 +44,7 @@ def queryDB_id(id):
     #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
     queryCurs.execute(
-        'SELECT ANY_VALUE(*) '
+        'SELECT * '
         'FROM messwerte '
         'WHERE id=%s', (id,))
     row = queryCurs.fetchall()
