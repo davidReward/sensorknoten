@@ -14,6 +14,7 @@ def queryDB_station(station):
          'WHERE originAddr=%s GROUP BY unit',(station,))
 
     row = queryCurs.fetchall()
+    print row
     row_json = [ dict(rec) for rec in row ]
 
     DBconn.close()
