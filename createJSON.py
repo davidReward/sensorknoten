@@ -46,7 +46,7 @@ def queryDB_id(id):
     queryCurs.execute(
         'SELECT ANY_VALUE(*) '
         'FROM messwerte '
-        'WHERE id=?', (id,))
+        'WHERE id=%s', (id,))
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]
     DBconn.close()
