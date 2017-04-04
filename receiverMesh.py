@@ -59,11 +59,11 @@ def receive():
     if radio.available():
         while radio.available():
             receive_payload = radio.read(radio.payloadSize)
-            print len(receive_payload)
-            decodedData = base64.b64decode(receive_payload)
-            destinationAddr, originAddr, lastHopAddr, messageID, stationID, value, unit, timeID = unpack('<hhhhhfhL', decodedData)
-            processData(stationID,messageID,timeID,originAddr,value,unit)
-
+            if len(receive_payload) == 28:
+                decodedData = base64.b64decode(receive_payload)
+                destinationAddr, originAddr, lastHopAddr, messageID, stationID, value, unit, timeID = unpack('<hhhhhfhL', decodedData)
+                processData(stationID,messageID,timeID,originAddr,value,unit)
+            return
 setup()
 #radio.printDetails()
 #signal.signal(signal.SIGINT, signal_handler)
