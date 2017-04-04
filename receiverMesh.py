@@ -66,7 +66,7 @@ def receive():
 
 setup()
 #radio.printDetails()
-signal.signal(signal.SIGINT, signal_handler)
+#signal.signal(signal.SIGINT, signal_handler)
 
 while 1:
     receive()
