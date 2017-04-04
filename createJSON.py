@@ -44,7 +44,7 @@ def queryDB_id(id):
     #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor()
     queryCurs.execute(
-        'SELECT * '
+        'SELECT ANY_VALUE(*) '
         'FROM messwerte '
         'WHERE id=?', (id,))
     row = queryCurs.fetchall()
