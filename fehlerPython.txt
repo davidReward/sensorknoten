@@ -1,0 +1,8 @@
+pi@node1:~/rf24/rf24libs/RF24/receiver $ Traceback (most recent call last):
+  File "receiverMesh.py", line 71, in <module>
+    receive()
+  File "receiverMesh.py", line 62, in receive
+    decodedData = base64.b64decode(receive_payload)
+  File "/usr/lib/python2.7/base64.py", line 76, in b64decode
+    raise TypeError(msg)
+TypeError: Incorrect padding
