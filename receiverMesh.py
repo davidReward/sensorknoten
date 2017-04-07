@@ -59,13 +59,30 @@ def receive():
     if radio.available():
         while radio.available():
             receive_payload = radio.read(radio.payloadSize)
-            if len(receive_payload) == 28:
-                decodedData = base64.b64decode(receive_payload)
-                destinationAddr, originAddr, lastHopAddr, messageID, stationID, value, unit, timeID = unpack('<hhhhhfhL', decodedData)
-                processData(stationID,messageID,timeID,originAddr,value,unit)
-            return
+
+	    anz_paddings = (len(receive_payload) % 3)+1
+	    if anz_paddings > 1:
+   		receive_payload += b'=' * anz_paddings
+
+ 	    try:
+            	decodedData = base64.b64decode(receive_payload)
+            	if len(decodedData) == 20: 
+                	destinationAddr, originAddr, lastHopAddr, messageID, stationID, value, unit, timeID = unpack('<hhhhhfhL', decodedData)
+                	print 'StationId: ' + str(stationID) + '\tMessageID: ' + str(messageID)  + '\tValue: ' + str(round(value,2))  
+                	processData(stationID,messageID,timeID,originAddr, round(value,2),unit)
+			return    
+	    except TypeError:
+		print '!!!!Fucking Base64'
+	    except mysql.connector.errors.InterfaceError:
+		print 'Mysql Fehler'
+		DBconn = mdb.connect(**configRaspi)
+		queryCurs=DBconn.cursor()
+	    except :
+		print 'anderer Fehler'
+	    return
+
 setup()
-#radio.printDetails()
+radio.printDetails()
 #signal.signal(signal.SIGINT, signal_handler)
 
 while 1:
