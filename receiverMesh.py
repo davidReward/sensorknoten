@@ -90,4 +90,4 @@ radio.printDetails()
 
 while 1:
 	receive()
-	time.sleep(1)
+time.sleep(1)
