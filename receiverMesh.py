@@ -76,7 +76,7 @@ def receive():
         		decodedData = base64.b64decode(receive_payload)
         		if len(decodedData) == 20:
                 		destinationAddr, originAddr, lastHopAddr, messageID, stationID, value, unit, timeID = unpack('<hhhhhfhL', decodedData)
-                		#logging.info('StationId: ' + str(stationID) + '\tMessageID: ' + str(messageID) + '\tValue: ' + str(round(value, 2)))
+                		logging.info('StationId: ' + str(stationID) + '\tMessageID: ' + str(messageID) + '\tValue: ' + str(round(value, 2)))
         			processData(stationID, messageID, timeID, originAddr, round(value, 2), unit)
         		return
     		except TypeError:
