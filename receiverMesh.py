@@ -85,7 +85,7 @@ def receive():
     			logging.error('Mysql Fehler')
     			DBconn.reconnect(attempts=5, delay=5)
     		except Exception as e:
-    			logging.error('anderer Fehler'+ str(e))
+    			logging.error(e)
     	return
 
 
