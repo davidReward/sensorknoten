@@ -9,7 +9,7 @@ from RF24 import *
 from struct import *
 from config import *
 
-logging.basicConfig(filename='/home/pi/sensorknoten/receiver.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='/home/pi/sensorknoten/receiver.log', level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 
 irq_gpio_pin = None
 
@@ -76,16 +76,16 @@ def receive():
         		decodedData = base64.b64decode(receive_payload)
         		if len(decodedData) == 20:
                 		destinationAddr, originAddr, lastHopAddr, messageID, stationID, value, unit, timeID = unpack('<hhhhhfhL', decodedData)
-                		#logging.info('StationId: ' + str(stationID) + '\tMessageID: ' + str(messageID) + '\tValue: ' + str(round(value, 2)))
+                		logging.info('StationId: ' + str(stationID) + '\tMessageID: ' + str(messageID) + '\tValue: ' + str(round(value, 2)))
         			processData(stationID, messageID, timeID, originAddr, round(value, 2), unit)
         		return
     		except TypeError:
     			logging.error('!!!!Fucking Base64')
-    		except mysql.connector.errors.InterfaceError:
+    		except mdb.errors.InterfaceError:
     			logging.error('Mysql Fehler')
     			DBconn.reconnect(attempts=5, delay=5)
     		except Exception as e:
-    			logging.error('anderer Fehler'+ str(e))
+    			logging.error(e)
     	return
 
 
@@ -95,5 +95,5 @@ radio.printDetails()
 
 while 1:
     receive()
-time.sleep(1)
+    time.sleep(1)
 
