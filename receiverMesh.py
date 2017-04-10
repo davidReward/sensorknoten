@@ -9,7 +9,7 @@ from RF24 import *
 from struct import *
 from config import *
 
-logging.basicConfig(filename='/home/pi/sensorknoten/receiver.log', level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename=raspiReceiverLogfile, level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 
 irq_gpio_pin = None
 
