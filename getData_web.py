@@ -18,6 +18,11 @@ def make_public_mdatum(mdata):
         else:
             new_ressource[field]= mdata[field]
     return new_ressource
+	
+def minimizeData(query_result):
+    query_result_New = query_result
+    
+    return query_result_New
 
 
 @auth.get_password
@@ -58,9 +63,11 @@ def get_mdataall(station):
 def get_mdataUnit(station, unit):
     begin = request.args.get('begin')
     end = request.args.get('end')
+    anzahlDatenpunkte =  request.args.get('anzahl')
 
     if begin is not None and end is not None:
         query_result = queryDB_station_interval(station, unit, begin, end)
+        query_result =  minimizeData(query_result)
         if len(query_result) != 0:
             return jsonify({'Messdaten':  [make_public_mdatum(data) for data in query_result]})
 
@@ -77,4 +84,4 @@ def get_mStationAll():
     abort(404)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=63000, debug=True)
+    app.run(host='0.0.0.0',port=8080, debug=True)

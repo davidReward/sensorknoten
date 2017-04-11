@@ -39,18 +39,29 @@ angular.module('wettEditor').controller(
                 sensorDataService.getStationNow(stationId).then(
                     function(response) {
                         $scope.sensorList = response.data;
-
-
                         if($scope.aktuelleSensorId != undefined){
                             $scope.zeitRaumBool = true ;
                         }else{
                             $scope.zeitRaumBool = false ;
+
                         }
+                        setAktuelleUnitId()
+
+
+
 
                     }, function(response) {
                         alertService.add("warning", response.data.error);
                     });
             };
+
+            setAktuelleUnitId = function () {
+                angular.forEach($scope.sensorList.Messdaten, function(value, key) {
+                    if($scope.aktuelleSensorId == $routeParams.unitId){
+                        $scope.aktuelleSensorId = value.unit;
+                    }
+                })
+            }
 
             getSensorDataBetween = function() {
                 startDate = ($filter('number')(($scope.startDate.getTime() / 1000), 0)).replace(/\./g, '');
@@ -162,16 +173,14 @@ angular.module('wettEditor').controller(
                 $scope.dataTest = [];
                 $scope.dataTest.push(dataTest);
 
-
-                console.log($scope.options2)
             }
 
-            $scope.options2 = {
+  /*          $scope.options2 = {
                 title: 'Station: ' + $scope.aktuelleStationId,
                 subtitle: 'Unit: ' + $scope.aktuelleSensorId ,
                 width: 900
             };
-
+*/
 
             $scope.dataTest = [];
 
