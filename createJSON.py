@@ -11,11 +11,12 @@ def queryDB_station(station):
     queryCurs = DBconn.cursor(dictionary=True)
 
     queryCurs.execute(
-         'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id) AS id, ANY_VALUE(value) AS value '
-         'FROM messwerte '
-         'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
-         'WHERE originAddr=%s GROUP BY unit '
-         'ORDER BY unit',(station,))
+	SELECT a.timestamp , originAddr, a.unit ,id, value
+         'FROM messwerte as a '
+         'INNER JOIN '
+         '(select max(timestamp) as timestamp, unit from messwerte where originAddr = %s group by unit ) as b '
+         'ON a.timestamp = b.timestamp and a.unit = b.unit ; ',(station,))
+         
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]

@@ -59,7 +59,6 @@ angular.module('wettEditor').directive('dateTimeChart',[ function () {
                 scope.$watch('data', function (data) {
                     if (scope.chartConfig != undefined) {
                         scope.chartConfig.series = data;
-                        console.log(scope.options);
                         scope.chartConfig.title.text = scope.options.title;
                         scope.chartConfig.subtitle.text = scope.options.subtitle;
                         scope.chartConfig.yAxis.title.text = scope.options.sensorName + ' ( '+ scope.options.einheit + ' )'

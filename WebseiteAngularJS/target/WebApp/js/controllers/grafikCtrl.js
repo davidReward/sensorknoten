@@ -11,8 +11,7 @@ angular.module('wettEditor').controller(
             $scope.aktuelleStationId = $routeParams.stationId;
             $scope.aktuelleStationIdBool = false;
 
-            $scope.aktuelleSensorId = $routeParams.unitId;
-
+            $scope.aktuelleSensorId = undefined;
 
 
 
@@ -39,13 +38,14 @@ angular.module('wettEditor').controller(
                 sensorDataService.getStationNow(stationId).then(
                     function(response) {
                         $scope.sensorList = response.data;
+                        setAktuelleUnitId()
                         if($scope.aktuelleSensorId != undefined){
                             $scope.zeitRaumBool = true ;
                         }else{
                             $scope.zeitRaumBool = false ;
 
                         }
-                        setAktuelleUnitId()
+
 
 
 
@@ -57,7 +57,8 @@ angular.module('wettEditor').controller(
 
             setAktuelleUnitId = function () {
                 angular.forEach($scope.sensorList.Messdaten, function(value, key) {
-                    if($scope.aktuelleSensorId == $routeParams.unitId){
+                    if($routeParams.unitId == value.unit){
+                        console.log('Settet: ' + value.unit)
                         $scope.aktuelleSensorId = value.unit;
                     }
                 })
@@ -72,7 +73,6 @@ angular.module('wettEditor').controller(
 
                 angular.forEach($scope.sensorList.Messdaten, function(value, key) {
                     if($scope.aktuelleSensorId == value.unit){
-                        console.log(value);
                         einheit_t = value.unit_name;
                         sensorName_t = value.sensor;
                     }
@@ -102,11 +102,13 @@ angular.module('wettEditor').controller(
             };
 
             $scope.changeStation = function () {
+                $routeParams.unitId = $scope.aktuelleStationId
                 $scope.getStationNow($scope.aktuelleStationId);
                 $scope.aktuelleStationIdBool = true;
             }
             $scope.changeSensor = function (unitID) {
                 $scope.aktuelleSensorId = unitID;
+
                 $scope.zeitRaumBool = true ;
             }
 
