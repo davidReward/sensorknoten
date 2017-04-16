@@ -62,6 +62,8 @@ angular.module('wettEditor').directive('dateTimeChart',[ function () {
                         scope.chartConfig.title.text = scope.options.title;
                         scope.chartConfig.subtitle.text = scope.options.subtitle;
                         scope.chartConfig.yAxis.title.text = scope.options.sensorName + ' ( '+ scope.options.einheit + ' )'
+                        scope.chartConfig.tooltip.headerFormat = '<b>{series.name}</b><br>'
+                        scope.chartConfig.tooltip.pointFormat = '{point.x:%e. %b %H:%M}: {point.y:.2f}' + scope.options.einheit
                         scope.drawChart();
                     }
                 });
