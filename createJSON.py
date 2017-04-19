@@ -11,7 +11,7 @@ def queryDB_station(station):
     queryCurs = DBconn.cursor(dictionary=True)
 
     queryCurs.execute(
-	SELECT a.timestamp , originAddr, a.unit ,id, value
+	'SELECT a.timestamp , originAddr, a.unit ,id, value '
          'FROM messwerte as a '
          'INNER JOIN '
          '(select max(timestamp) as timestamp, unit from messwerte where originAddr = %s group by unit ) as b '
