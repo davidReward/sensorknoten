@@ -16,7 +16,7 @@ def queryDB_station(station):
          'INNER JOIN '
          '(select max(timestamp) as timestamp, unit from messwerte where originAddr = %s group by unit ) as b '
          'ON a.timestamp = b.timestamp and a.unit = b.unit '
-		 'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
+		 'INNER JOIN einheiten ON a.unit = einheiten.unit_id '
          ' ; ',(station,))
          
 
