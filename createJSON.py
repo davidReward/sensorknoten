@@ -1,17 +1,24 @@
 import mysql.connector as mdb
 from config import *
 
+def connectToDB():
+	return mdb.connect(**configRaspi)
+	
 def queryDB_station(station):
-    DBconn = mdb.connect(**config)
+    DBconn = connectToDB()
     # This enables column access by name: row['column_name']
     #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor(dictionary=True)
 
     queryCurs.execute(
-         'SELECT MAX(timestamp) AS timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id) AS id, ANY_VALUE(value) AS value '
-         'FROM messwerte '
-         'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
-         'WHERE originAddr=%s GROUP BY unit',(station,))
+	'SELECT a.timestamp , originAddr, a.unit ,id, value, unit_name,sensor '
+         'FROM messwerte as a '
+         'INNER JOIN '
+         '(select max(timestamp) as timestamp, unit from messwerte where originAddr = %s group by unit ) as b '
+         'ON a.timestamp = b.timestamp and a.unit = b.unit '
+		 'INNER JOIN einheiten ON a.unit = einheiten.unit_id '
+         ' ; ',(station,))
+         
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]
@@ -20,7 +27,7 @@ def queryDB_station(station):
     return row_json
 
 def queryDB_station_interval(station, unit, begin, end):
-    DBconn = mdb.connect(**config)
+    DBconn = connectToDB()
     # This enables column access by name: row['column_name']
     #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor(dictionary=True)
@@ -29,7 +36,8 @@ def queryDB_station_interval(station, unit, begin, end):
         'SELECT timestamp, originAddr, unit,unit_name,sensor ,ANY_VALUE(id) AS id, ANY_VALUE(value) AS value '
         'FROM messwerte '
         'INNER JOIN einheiten ON messwerte.unit = einheiten.unit_id '
-        'WHERE originAddr=%s AND unit=%s AND timestamp BETWEEN %s AND %s', (station, unit,  begin, end,))
+        'WHERE originAddr=%s AND unit=%s AND timestamp BETWEEN %s AND %s '
+        'ORDER BY timestamp DESC', (station, unit,  begin, end,))
 
     row = queryCurs.fetchall()
     row_json = [ dict(rec) for rec in row ]
@@ -39,7 +47,7 @@ def queryDB_station_interval(station, unit, begin, end):
 
 
 def queryDB_id(id):
-    DBconn = mdb.connect(**config)
+    DBconn = connectToDB()
     # This enables column access by name: row['column_name']
     #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor(dictionary=True)
@@ -53,7 +61,7 @@ def queryDB_id(id):
     return row_json
 
 def queryDBallStation():
-    DBconn = mdb.connect(**config)
+    DBconn = connectToDB()
     # This enables column access by name: row['column_name']
     #DBconn.row_factory = sqlite3.Row
     queryCurs = DBconn.cursor(dictionary=True)
@@ -66,3 +74,4 @@ def queryDBallStation():
     row_json = [ dict(rec) for rec in row ]
     DBconn.close()
     return row_json
+	

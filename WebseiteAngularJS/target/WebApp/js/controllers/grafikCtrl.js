@@ -11,8 +11,7 @@ angular.module('wettEditor').controller(
             $scope.aktuelleStationId = $routeParams.stationId;
             $scope.aktuelleStationIdBool = false;
 
-            $scope.aktuelleSensorId = $routeParams.unitId;
-
+            $scope.aktuelleSensorId = undefined;
 
 
 
@@ -39,18 +38,31 @@ angular.module('wettEditor').controller(
                 sensorDataService.getStationNow(stationId).then(
                     function(response) {
                         $scope.sensorList = response.data;
-
-
+                        setAktuelleUnitId()
                         if($scope.aktuelleSensorId != undefined){
                             $scope.zeitRaumBool = true ;
                         }else{
                             $scope.zeitRaumBool = false ;
+
                         }
+
+
+
+
 
                     }, function(response) {
                         alertService.add("warning", response.data.error);
                     });
             };
+
+            setAktuelleUnitId = function () {
+                angular.forEach($scope.sensorList.Messdaten, function(value, key) {
+                    if($routeParams.unitId == value.unit){
+                        console.log('Settet: ' + value.unit)
+                        $scope.aktuelleSensorId = value.unit;
+                    }
+                })
+            }
 
             getSensorDataBetween = function() {
                 startDate = ($filter('number')(($scope.startDate.getTime() / 1000), 0)).replace(/\./g, '');
@@ -61,7 +73,6 @@ angular.module('wettEditor').controller(
 
                 angular.forEach($scope.sensorList.Messdaten, function(value, key) {
                     if($scope.aktuelleSensorId == value.unit){
-                        console.log(value);
                         einheit_t = value.unit_name;
                         sensorName_t = value.sensor;
                     }
@@ -91,11 +102,13 @@ angular.module('wettEditor').controller(
             };
 
             $scope.changeStation = function () {
+                $routeParams.unitId = $scope.aktuelleStationId
                 $scope.getStationNow($scope.aktuelleStationId);
                 $scope.aktuelleStationIdBool = true;
             }
             $scope.changeSensor = function (unitID) {
                 $scope.aktuelleSensorId = unitID;
+
                 $scope.zeitRaumBool = true ;
             }
 
@@ -155,23 +168,29 @@ angular.module('wettEditor').controller(
                     if(value.value != null){
                         array1 = [];
                         array1.push( value.timestamp * 1000);
-                        array1.push( parseFloat((($filter('number')(value.value, 1)).replace(/\,/g, '.')).replace(/\./g, ','))) ;
+                        console.log(value.value)
+                        //array1.push( parseFloat((($filter('number')(value.value, 1)).replace(/\,/g, '.')).replace(/\./g, ','))) ;
+
+
+                        var1 =   $filter('number')(value.value, 1).replace(/,/g, ':')
+                        var1 = var1.replace(/\./g, '').replace(/:/g, '.')
+                        console.log(var1)
+
+                        array1.push(parseFloat(var1))
                         dataTest.data.push(array1);
                     }
                 });
                 $scope.dataTest = [];
                 $scope.dataTest.push(dataTest);
 
-
-                console.log($scope.options2)
             }
 
-            $scope.options2 = {
+  /*          $scope.options2 = {
                 title: 'Station: ' + $scope.aktuelleStationId,
                 subtitle: 'Unit: ' + $scope.aktuelleSensorId ,
                 width: 900
             };
-
+*/
 
             $scope.dataTest = [];
 
