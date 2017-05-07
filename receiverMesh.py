@@ -65,12 +65,12 @@ def processData(stationID, messageID, timeID, originAddr, value, unit):
     ID_hashed = genearteID_hashed(stationID, messageID, timeID)
     writeToDatabase(ID_hashed, originAddr, value, unit)
 
-@timeout_decorator.timeout(5, use_signals=False)
+
 def readRadio():
     received_payload = radio.read(radio.payloadSize)
     return received_payload 
 
-
+@timeout_decorator.timeout(5, use_signals=False)
 def receive():
     if radio.available():
         while radio.available():
@@ -104,6 +104,9 @@ radio.printDetails()
 # signal.signal(signal.SIGINT, signal_handler)
 
 while 1:
-    receive()
+    try:
+        receive()
+    except Exception as e:
+        logging.error(e)
     time.sleep(1)
 
