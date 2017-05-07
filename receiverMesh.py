@@ -5,11 +5,13 @@ import mysql.connector as mdb
 import signal
 import sys
 import logging
+import timeout_decorator
 from RF24 import *
 from struct import *
 from config import *
 
-logging.basicConfig(filename='/home/pi/sensorknoten/receiver.log', level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
+
+logging.basicConfig(filename='/home/pi/sensorknoten/receiver.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 irq_gpio_pin = None
 
@@ -63,12 +65,17 @@ def processData(stationID, messageID, timeID, originAddr, value, unit):
     ID_hashed = genearteID_hashed(stationID, messageID, timeID)
     writeToDatabase(ID_hashed, originAddr, value, unit)
 
+@timeout_decorator.timeout(5, use_signals=False)
+def readRadio():
+    received_payload = radio.read(radio.payloadSize)
+    return received_payload 
+
 
 def receive():
     if radio.available():
         while radio.available():
-    		try:
-	       		receive_payload = radio.read(radio.payloadSize)
+                try:
+                        receive_payload = readRadio()
 
 	        	anz_paddings = (len(receive_payload) % 3) + 1
         		if anz_paddings > 1:
@@ -80,12 +87,15 @@ def receive():
         			processData(stationID, messageID, timeID, originAddr, round(value, 2), unit)
         		return
     		except TypeError:
-    			logging.error('!!!!Fucking Base64')
+    			logging.error('Base64 Fehler')
     		except mdb.errors.InterfaceError:
     			logging.error('Mysql Fehler')
     			DBconn.reconnect(attempts=5, delay=5)
+                except StopIteration:
+                        logging.error('Timeout - radio.read()')
     		except Exception as e:
     			logging.error(e)
+       
     	return
 
 
