@@ -3,6 +3,10 @@ from flask.ext.httpauth import HTTPBasicAuth
 from createJSON import *
 from flask_cors import CORS, cross_origin
 from config import *
+from sss_config import *
+import sys
+import json
+
 
 auth = HTTPBasicAuth()
 
@@ -81,6 +85,43 @@ def get_mStationAll():
     query_result = queryDBallStation()
     if len(query_result) != 0:
         return jsonify({'Stationen': query_result})
+    abort(404)
+
+@app.route('/api/signer', methods=['GET', 'POST'])
+#@auth.login_required
+def json_in_db():
+    # force erzwingt interpretation als JSON
+    content = request.get_json(force=True)
+
+    # TODO: Daten loeschen mit where 1 cond.
+
+    for item in range(0,len(content)):
+        writeDB(content[item]['Name'], 'no position', 'no description', content[item]['Timespan'] , content[item]['URL'])
+
+    #writeDB(content[0]['Name'], 'keine Position', 'keine Beschreibung', content[0]['Timespan'])
+
+
+    resp = jsonify()
+    resp.status_code = 201
+    return resp
+
+
+@app.route('/api/signer/<string:name>', methods=['GET'])
+#@auth.login_required
+def json_from_db(name):
+    query_result = readDB(name)
+    if len(query_result) != 0:
+        return jsonify({'signers': query_result})
+
+
+    abort(404)
+
+@app.route('/api/signers', methods=['GET'])
+#@auth.login_required
+def json_from_db_all():
+    query_result = readDB_all()
+    if len(query_result) != 0:
+        return jsonify({'signers': query_result})
     abort(404)
 
 if __name__ == '__main__':
